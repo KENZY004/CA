@@ -553,11 +553,13 @@ export default function Home() {
 const COACHING_VIDEOS = [
   {
     src: new URL('./assets/video/coaching 1.mp4', import.meta.url).href,
+    poster: ASSETS.HERO.ACTION_CARD_1,
     label: 'Coaching Session 1',
     description: 'Elite training drills & fundamentals',
   },
   {
     src: new URL('./assets/video/coaching 2.mp4', import.meta.url).href,
+    poster: ASSETS.HERO.ACTION_CARD_3,
     label: 'Coaching Session 2',
     description: 'Advanced techniques & team play',
   },
@@ -591,10 +593,11 @@ function VideoCarousel() {
             key={v.src}
             ref={el => { videoRefs.current[i] = el; }}
             src={v.src}
+            poster={v.poster}
             controls
             playsInline
             muted
-            preload="none"
+            preload="metadata"
             className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
             style={{ opacity: i === active ? 1 : 0, pointerEvents: i === active ? 'auto' : 'none' }}
           />

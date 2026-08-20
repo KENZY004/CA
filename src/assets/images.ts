@@ -39,6 +39,6 @@ export const ASSETS = {
   },
   PERFORMANCE: {
     ANALYTICS_HERO: new URL('./images/performance_analytics_visual_1785509230519.jpg', import.meta.url).href,
-    DASHBOARD_BG: '/katerina-97NQM4A8r8o-unsplash.jpg'
+    DASHBOARD_BG: new URL('./images/performance_analytics_visual_1785509230519.jpg', import.meta.url).href,
   },
 };
