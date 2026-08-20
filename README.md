@@ -61,10 +61,7 @@ The website delivers a cutting-edge digital experience featuring:
   4. Waiver & Terms Confirmation
   5. Secure Checkout Integration
 
-### 6. 🔒 Admin Portal (`/admin`)
-- Secure dashboard for viewing lead submissions, enrollment statistics, athlete analytics, and updating site media.
 
----
 
 ## 🛠️ Tech Stack
 
