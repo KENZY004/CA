@@ -1,58 +1,65 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function CustomCursor() {
-  const [isHovering, setIsHovering] = useState(false);
   const dotRef = useRef<HTMLDivElement>(null);
   const followerRef = useRef<HTMLDivElement>(null);
-  
   const mousePos = useRef({ x: -100, y: -100 });
   const followerPos = useRef({ x: -100, y: -100 });
-  const rafId = useRef<number>(0);
 
   useEffect(() => {
-    // Hide cursor if touch screen
-    if (typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
+    // Hide cursor if touch device
+    if (typeof window === 'undefined' || ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
       return;
     }
 
+    let rafId: number;
+
     const updatePosition = () => {
-      // Lerp follower position smoothly
-      followerPos.current.x += (mousePos.current.x - followerPos.current.x) * 0.2;
-      followerPos.current.y += (mousePos.current.y - followerPos.current.y) * 0.2;
+      // Smooth lerp for outer ring
+      followerPos.current.x += (mousePos.current.x - followerPos.current.x) * 0.18;
+      followerPos.current.y += (mousePos.current.y - followerPos.current.y) * 0.18;
 
       if (dotRef.current) {
         dotRef.current.style.transform = `translate3d(${mousePos.current.x - 4}px, ${mousePos.current.y - 4}px, 0)`;
       }
       if (followerRef.current) {
-        followerRef.current.style.transform = `translate3d(${followerPos.current.x - 16}px, ${followerPos.current.y - 16}px, 0) scale(${isHovering ? 1.8 : 1})`;
+        followerRef.current.style.transform = `translate3d(${followerPos.current.x - 16}px, ${followerPos.current.y - 16}px, 0)`;
       }
 
-      rafId.current = requestAnimationFrame(updatePosition);
+      rafId = requestAnimationFrame(updatePosition);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      mousePos.current = { x: e.clientX, y: e.clientY };
+      mousePos.current.x = e.clientX;
+      mousePos.current.y = e.clientY;
     };
 
     const handleMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (target && target.closest('button, a, input, textarea, select, [role="button"]')) {
-        setIsHovering(true);
+        if (followerRef.current) {
+          followerRef.current.style.transform += ' scale(1.6)';
+          followerRef.current.classList.add('border-orange', 'bg-orange/10');
+          followerRef.current.classList.remove('border-orange/60');
+        }
       } else {
-        setIsHovering(false);
+        if (followerRef.current) {
+          followerRef.current.classList.remove('border-orange', 'bg-orange/10');
+          followerRef.current.classList.add('border-orange/60');
+        }
       }
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
     window.addEventListener('mouseover', handleMouseOver, { passive: true });
-    rafId.current = requestAnimationFrame(updatePosition);
+    rafId = requestAnimationFrame(updatePosition);
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseover', handleMouseOver);
-      cancelAnimationFrame(rafId.current);
+      cancelAnimationFrame(rafId);
     };
-  }, [isHovering]);
+  }, []);
 
   if (typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
     return null;
@@ -60,17 +67,15 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Small Cursor Dot */}
+      {/* Center cursor dot */}
       <div 
         ref={dotRef}
         className="fixed top-0 left-0 w-2 h-2 bg-orange rounded-full pointer-events-none z-[9999] will-change-transform shadow-sm"
       />
-      {/* Smooth Ring Follower */}
+      {/* Smooth ring follower */}
       <div 
         ref={followerRef}
-        className={`fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none z-[9998] will-change-transform transition-colors duration-200 border ${
-          isHovering ? 'border-orange bg-orange/10' : 'border-orange/60 bg-transparent'
-        }`}
+        className="fixed top-0 left-0 w-8 h-8 rounded-full pointer-events-none z-[9998] will-change-transform transition-[border-color,background-color] duration-150 border border-orange/60 bg-transparent"
       />
     </>
   );

@@ -46,37 +46,39 @@ function SmoothScroll() {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
+    // Disable custom scroll physics on mobile devices for 100% native responsiveness
+    const isTouch = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    if (isTouch) return;
+
     const lenis = new Lenis({
-      duration: 1.0,
+      duration: 0.9,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.5,
+      wheelMultiplier: 0.9,
       infinite: false,
     });
 
     lenisRef.current = lenis;
 
-    // Use GSAP's ticker for Lenis
-    const update = (time: number) => {
-      lenis.raf(time * 1000);
-    };
-
     lenis.on('scroll', ScrollTrigger.update);
 
-    gsap.ticker.add(update);
+    let rafId: number;
+    const raf = (time: number) => {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
+    };
+
+    rafId = requestAnimationFrame(raf);
+    gsap.ticker.lagSmoothing(0);
 
     return () => {
       lenis.destroy();
-      gsap.ticker.remove(update);
+      cancelAnimationFrame(rafId);
       lenisRef.current = null;
     };
   }, []);
 
   useEffect(() => {
-    // Reset scroll to top instantly on route change
     window.scrollTo(0, 0);
     if (lenisRef.current) {
       lenisRef.current.scrollTo(0, { immediate: true });

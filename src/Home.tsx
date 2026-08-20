@@ -594,6 +594,7 @@ function VideoCarousel() {
             controls
             playsInline
             muted
+            preload="none"
             className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
             style={{ opacity: i === active ? 1 : 0, pointerEvents: i === active ? 'auto' : 'none' }}
           />

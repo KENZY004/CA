@@ -55,6 +55,7 @@ export default function OptimizedImage({
         width={width}
         height={height}
         loading={priority ? 'eager' : 'lazy'}
+        decoding="async"
         onLoad={() => setIsLoaded(true)}
         className={`w-full h-full object-cover transition-opacity duration-700 ${isLoaded ? 'opacity-100' : 'opacity-0'} ${imgClassName || ''}`}
         referrerPolicy="no-referrer"
