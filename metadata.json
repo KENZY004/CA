@@ -1,0 +1,6 @@
+{
+  "name": "Challengers Volleyball Academy",
+  "description": "Elite volleyball coaching for ages 5-18 with online booking, progress tracking, and professional training programs.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

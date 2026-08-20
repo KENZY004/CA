@@ -1,0 +1,237 @@
+/* stylelint-disable */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Archivo:ital,wght@0,100..900;1,100..900&display=swap');
+@import "tailwindcss";
+
+
+@theme {
+  --font-serif: "Fraunces", serif;
+  --font-sans: "Archivo", sans-serif;
+  
+  --color-ivory: #F5F0E6;
+  --color-espresso: #1B1B1D;
+  --color-crimson: #C1272D;
+  --color-orange: #C1272D;
+  --color-yellow: #fbbf24;
+  --color-sand: #EAE3D5;
+  --color-clay: #d4d4d4;
+  --color-muted: #8c8581;
+  
+  --radius-xl: 1.5rem;
+  --radius-2xl: 1.75rem;
+}
+
+@layer base {
+  html, body {
+    @apply bg-ivory text-espresso font-sans selection:bg-crimson selection:text-white;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight;
+  }
+}
+
+@layer utilities {
+  .font-condensed {
+    @apply font-sans font-black tracking-[-0.05em] uppercase;
+  }
+  
+  .font-serif-italic {
+    @apply font-serif italic;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .section-dark {
+    @apply bg-espresso text-ivory;
+  }
+
+  .section-light {
+    @apply bg-ivory text-espresso;
+  }
+
+  /* GPU Hardware Acceleration */
+  .gpu-layer {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  .will-change-opacity {
+    will-change: opacity;
+  }
+
+  .will-change-transform {
+    will-change: transform;
+  }
+}
+
+/* Custom Cursor */
+.custom-cursor {
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-crimson);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+}
+
+.custom-cursor-follower {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--color-crimson);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out;
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* Smooth Scrolling with Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* ── Camps Scroll-Driven Hero ───────────────────────────── */
+.camps-hero {
+  min-height: 100vh;
+  position: relative;
+  display: grid;
+  align-content: center;
+  overflow: hidden;
+  container-type: inline-size;
+}
+
+/* Rainbow gradient title */
+.camps-hero-title {
+  font-size: clamp(2.8rem, 8cqi, 7.5rem);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  background:
+    /* fallback */
+    linear-gradient(45deg,
+      hsl(0, 100%, 70%), hsl(30, 100%, 70%), hsl(60, 100%, 70%),
+      hsl(120, 100%, 70%), hsl(200, 100%, 70%), hsl(270, 100%, 70%), hsl(0, 100%, 70%)
+    );
+  background: linear-gradient(40deg in hsl longer hue, hsl(0, 100%, 70%), hsl(360, 100%, 70%));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  max-width: 70%;
+}
+
+/* Parallelogram rainbow button */
+.camps-hero-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.7em 1.8em;
+  cursor: pointer;
+  color: #fff;
+  font-weight: 900;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  border: none;
+  background: transparent;
+  z-index: 1;
+}
+
+.camps-hero-btn::before,
+.camps-hero-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(45deg,
+      hsl(0, 100%, 70%), hsl(30, 100%, 70%), hsl(60, 100%, 70%),
+      hsl(120, 100%, 70%), hsl(200, 100%, 70%), hsl(270, 100%, 70%), hsl(0, 100%, 70%)
+    );
+  background: linear-gradient(40deg in hsl longer hue, hsl(0, 100%, 70%), hsl(360, 100%, 70%));
+  z-index: -1;
+  clip-path: polygon(92% 0, 100% 50%, 92% 100%, 0% 100%, 7% 50%, 0% 0%);
+}
+
+.camps-hero-btn::after {
+  background: #1A1A1D;
+  inset: 2px;
+}
+
+.camps-hero-btn:hover::after {
+  background: #2a2a2d;
+}
+
+/* Scroll-driven fade + scale exit — only in supporting browsers */
+@supports (animation-timeline: view()) {
+  @keyframes camps-hero-exit {
+    to {
+      opacity: 0;
+      transform: scale(1.07);
+    }
+  }
+
+  .camps-hero {
+    animation: camps-hero-exit linear both;
+    animation-timeline: view();
+    animation-range: exit -80px;
+  }
+}
