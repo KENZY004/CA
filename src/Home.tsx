@@ -552,12 +552,12 @@ export default function Home() {
 // ─────────────────────────────────────────────────────────────────────────────
 const COACHING_VIDEOS = [
   {
-    src: '/src/assets/video/coaching 1.mp4',
+    src: new URL('./assets/video/coaching 1.mp4', import.meta.url).href,
     label: 'Coaching Session 1',
     description: 'Elite training drills & fundamentals',
   },
   {
-    src: '/src/assets/video/coaching 2.mp4',
+    src: new URL('./assets/video/coaching 2.mp4', import.meta.url).href,
     label: 'Coaching Session 2',
     description: 'Advanced techniques & team play',
   },
