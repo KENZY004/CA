@@ -52,8 +52,8 @@ export default function Home() {
   return (
     <div ref={containerRef} className="flex flex-col">
       <SEO 
-        title="Elite Volleyball Academy" 
-        description="Experience the next level of volleyball training at Challengers Volleyball Academy. High-impact coaching, professional facilities, and a championship mindset."
+        title="Challengers Volleyball Academy" 
+        description="Volleyball coaching for kids and adults in the Bay Area. We train at Fremont, Tracy, and San Leandro. All skill levels welcome."
       />
       <ModernHero />
       <Marquee 
@@ -76,7 +76,7 @@ export default function Home() {
         </div>
 
         {/* Left Col: Yellow Statement */}
-        <div className="flex-1 bg-yellow p-12 lg:p-20 pt-32 flex flex-col justify-between relative border-r border-espresso/5 overflow-hidden">
+        <div className="flex-1 bg-yellow p-6 sm:p-12 lg:p-20 pt-20 sm:pt-32 flex flex-col justify-between relative border-r border-espresso/5 overflow-hidden">
           {/* Stylized Background Image for Yellow Section */}
           <div className="absolute inset-0 opacity-10 pointer-events-none" aria-hidden="true">
             <OptimizedImage 
@@ -93,20 +93,20 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="relative z-10"
           >
-            <div className="text-espresso font-black text-[10px] mb-4 tracking-[0.4em] uppercase opacity-40">ELITE TRAINING</div>
-            <h1 className="text-espresso font-condensed text-5xl sm:text-7xl md:text-8xl leading-[0.85] mb-8 uppercase tracking-tighter">
+            <div className="text-espresso font-black text-[10px] mb-3 md:mb-4 tracking-[0.3em] md:tracking-[0.4em] uppercase opacity-40">ELITE TRAINING</div>
+            <h1 className="text-espresso font-condensed text-4xl sm:text-7xl md:text-8xl leading-[0.9] md:leading-[0.85] mb-6 md:mb-8 uppercase tracking-tighter">
               PLAY <br />
               <span className="text-white drop-shadow-sm">BETTER</span> <br />
-              <span className="font-serif-italic text-3xl sm:text-5xl md:text-6xl normal-case tracking-normal text-espresso/80 block mt-2">reach higher.</span>
+              <span className="font-serif-italic text-2xl sm:text-5xl md:text-6xl normal-case tracking-normal text-espresso/80 block mt-2">reach higher.</span>
             </h1>
-            <p className="text-espresso/70 text-sm max-w-[320px] leading-relaxed mb-10 font-bold">
-              Professional volleyball coaching for athletes who want to sharpen their skills and track their progress.
+            <p className="text-espresso/70 text-xs sm:text-sm max-w-[320px] leading-relaxed mb-8 md:mb-10 font-bold">
+              Good coaching makes a real difference. We work with each player to sharpen their skills and track how far they've come.
             </p>
             
-            <div className="flex flex-wrap gap-4 mt-12">
+            <div className="flex flex-wrap gap-4 mt-8 md:mt-12">
               <NavLink 
                 to="/register" 
-                className="bg-espresso text-white px-8 py-4 rounded-full font-condensed text-xs tracking-widest flex items-center gap-3 hover:bg-orange transition-all group shadow-xl"
+                className="bg-espresso text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-full font-condensed text-xs tracking-widest flex items-center gap-3 hover:bg-orange transition-all group shadow-xl"
               >
                 BOOK CLASS
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -114,7 +114,7 @@ export default function Home() {
             </div>
           </motion.div>
 
-          <div className="flex flex-wrap gap-4 items-end mt-12 md:mt-20 relative min-h-[250px] md:h-56">
+          <div className="flex flex-wrap gap-4 items-end mt-10 md:mt-20 relative min-h-[220px] sm:min-h-[250px] md:h-56">
             {[ASSETS.HERO.ACTION_CARD_1, ASSETS.HERO.ACTION_CARD_2, ASSETS.HERO.ACTION_CARD_3, ASSETS.HERO.ACTION_CARD_4].map((img, i) => (
               <motion.div 
                 key={i}
@@ -123,7 +123,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`absolute left-${i * 12} bottom-${i * 2} w-24 sm:w-32 h-32 sm:h-44 bg-sand rounded-2xl overflow-hidden border border-espresso/10 shadow-2xl z-${(i + 1) * 10} will-change-transform`}
+                className={`absolute left-${i * 8} sm:left-${i * 12} bottom-${i * 2} w-20 sm:w-32 h-28 sm:h-44 bg-sand rounded-2xl overflow-hidden border border-espresso/10 shadow-2xl z-${(i + 1) * 10} will-change-transform`}
               >
                 <OptimizedImage src={img} alt="Action" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-espresso/40 to-transparent" />
@@ -172,9 +172,9 @@ export default function Home() {
                   </div>
                   <div className="w-2 h-2 bg-orange rounded-full animate-ping" />
                 </div>
-                <h3 className="font-serif-italic text-3xl mt-10 text-espresso group-hover:text-orange transition-colors">Precision Setting</h3>
-                <p className="text-[10px] uppercase tracking-[0.3em] text-espresso/40 mt-4 font-black">Technical Mastery Class</p>
-                <p className="text-espresso/60 text-xs mt-6 leading-relaxed max-w-[200px]">Perfect your touch with elite setting drills designed for high-stakes play.</p>
+                <h3 className="font-serif-italic text-3xl mt-10 text-espresso group-hover:text-orange transition-colors">Setting Basics</h3>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-espresso/40 mt-4 font-black">Technique Class</p>
+                <p className="text-espresso/60 text-xs mt-6 leading-relaxed max-w-[200px]">We break down the setting motion step by step — great for beginners and players looking to clean up their form.</p>
               </div>
               
               <div className="mt-12 flex items-center gap-4">
@@ -201,7 +201,7 @@ export default function Home() {
                   </div>
                 </div>
                 <h3 className="font-condensed text-3xl mt-8 leading-[0.9] font-black tracking-tighter uppercase">
-                  LIVE PROGRESS <br /> TRACKING
+                  SEE YOUR <br /> PROGRESS
                 </h3>
               </div>
               
@@ -283,7 +283,7 @@ export default function Home() {
                 transition={{ delay: 0.1 }}
                 className="text-white/60 text-sm leading-relaxed font-medium max-w-xl mx-auto"
               >
-                Take a look at how we train for speed, power, and smart plays on the court every single day.
+                Watch how we train — we focus on the details that make players better, every session.
               </motion.p>
             </div>
 
@@ -297,7 +297,7 @@ export default function Home() {
 
       {/* Text Reveal Section */}
       <section className="bg-ivory gsap-reveal">
-        <TextReveal text="We help you master the game. Our coaches use real data and expert techniques to help every player reach their full potential." />
+        <TextReveal text="We help players get better — one session at a time. Our coaches keep it simple, focused, and built around what each player actually needs." />
       </section>
 
       {/* Expertise Section (Pinned Panels) */}
@@ -323,12 +323,12 @@ export default function Home() {
             viewport={{ once: true }}
             className="max-w-3xl mx-auto"
           >
-            <div className="text-yellow font-condensed text-xs mb-6 tracking-[0.5em] uppercase">What we stand for</div>
-            <h2 className="text-white text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-condensed leading-[0.85] mb-10 uppercase tracking-tighter">
-              Setting <span className="font-serif-italic lowercase text-orange italic tracking-normal">the bar</span> <br />
-              higher for you.
+            <div className="text-yellow font-condensed text-[10px] sm:text-xs mb-4 sm:mb-6 tracking-[0.35em] sm:tracking-[0.5em] uppercase">What we stand for</div>
+            <h2 className="text-white text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-condensed leading-[0.9] md:leading-[0.85] mb-6 sm:mb-10 uppercase tracking-tighter">
+              We're here to <span className="font-serif-italic lowercase text-orange italic tracking-normal">help you</span> <br />
+              get better.
             </h2>
-            <NavLink to="/about" className="group inline-flex items-center gap-3 text-xs font-black uppercase tracking-[0.3em] text-white/80 hover:text-orange transition-colors">
+            <NavLink to="/about" className="group inline-flex items-center gap-3 text-[11px] sm:text-xs font-black uppercase tracking-[0.2em] sm:tracking-[0.3em] text-white/80 hover:text-orange transition-colors">
               Discover Our Story <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </NavLink>
           </motion.div>
@@ -336,7 +336,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="relative py-16 md:py-24 bg-[#FBF9F6] overflow-hidden gsap-reveal">
+      <section className="relative py-12 sm:py-16 md:py-24 bg-[#FBF9F6] overflow-hidden gsap-reveal">
         {/* Background Texture Overlay */}
         <div className="absolute inset-0 z-0 opacity-[0.04] pointer-events-none">
           <img 
@@ -348,25 +348,25 @@ export default function Home() {
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="mb-14 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div className="mb-10 md:mb-14 flex flex-col md:flex-row md:items-end justify-between gap-6 md:gap-8">
             <div className="max-w-xl">
-              <div className="text-orange font-black text-[10px] tracking-[0.5em] uppercase mb-4 flex items-center gap-4">
-                <span className="w-10 h-px bg-orange/30" />
+              <div className="text-orange font-black text-[10px] tracking-[0.4em] md:tracking-[0.5em] uppercase mb-3 md:mb-4 flex items-center gap-3 md:gap-4">
+                <span className="w-8 md:w-10 h-px bg-orange/30" />
                 Our Results
               </div>
-              <h2 className="text-4xl md:text-6xl lg:text-7xl font-condensed text-espresso uppercase leading-[0.85] tracking-tighter">
+              <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-condensed text-espresso uppercase leading-[0.9] md:leading-[0.85] tracking-tighter">
                 Real progress <br />
                 you can <span className="text-orange font-serif-italic normal-case italic">see.</span>
               </h2>
             </div>
             <div className="max-w-xs">
-              <p className="text-espresso/60 text-xs font-medium leading-relaxed uppercase tracking-widest">
-                Measuring success through development, dedication, and measurable athletic growth.
+              <p className="text-espresso/60 text-[11px] sm:text-xs font-medium leading-relaxed uppercase tracking-widest">
+                Numbers we're proud of — earned through hard work on the court, not marketing.
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
             {STATS.map((stat, idx) => (
               <motion.div
                 key={stat.label}
@@ -374,7 +374,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className={`relative h-[340px] rounded-[2.5rem] p-6 flex flex-col items-center justify-center text-center overflow-hidden group shadow-[0_20px_40px_-15px_rgba(0,0,0,0.12)] transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_30px_60px_-20px_rgba(0,0,0,0.18)] ${
+                className={`relative h-[280px] sm:h-[340px] rounded-[2rem] sm:rounded-[2.5rem] p-6 flex flex-col items-center justify-center text-center overflow-hidden group shadow-[0_20px_40px_-15px_rgba(0,0,0,0.12)] transition-all duration-700 hover:-translate-y-2 hover:shadow-[0_30px_60px_-20px_rgba(0,0,0,0.18)] ${
                   idx === 0 ? "bg-[#1A1A1A] text-white" :
                   idx === 1 ? "bg-[#D62828] text-white" :
                   idx === 2 ? "bg-[#F9BC00] text-espresso" :
@@ -382,7 +382,7 @@ export default function Home() {
                 }`}
               >
                 {/* Subtle Inner Glow */}
-                <div className="absolute inset-0 border-[1px] border-white/10 rounded-[2.5rem] pointer-events-none" />
+                <div className="absolute inset-0 border-[1px] border-white/10 rounded-[2rem] sm:rounded-[2.5rem] pointer-events-none" />
                 
                 {/* Decorative Background Accent - Stylized Image */}
                 <div className="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.06] transition-opacity duration-700 pointer-events-none overflow-hidden scale-110 group-hover:scale-125">
@@ -400,23 +400,23 @@ export default function Home() {
                 </div>
 
                 <div className="relative z-10 flex flex-col items-center w-full max-w-full">
-                  <div className={`font-black uppercase tracking-[0.4em] text-[10px] mb-4 transition-colors duration-500 ${
+                  <div className={`font-black uppercase tracking-[0.35em] md:tracking-[0.4em] text-[9px] sm:text-[10px] mb-3 sm:mb-4 transition-colors duration-500 ${
                     idx === 2 ? "text-espresso/60" : "text-white/50"
                   }`}>
                     {stat.label}
                   </div>
 
                   <div className={`font-condensed font-black leading-none tracking-tighter flex items-center justify-center flex-wrap ${
-                    stat.value >= 1000 ? "text-4xl sm:text-5xl md:text-6xl" : "text-5xl sm:text-6xl md:text-7xl"
+                    stat.value >= 1000 ? "text-4xl sm:text-5xl md:text-6xl" : "text-4xl sm:text-6xl md:text-7xl"
                   }`}>
                     <Counter value={stat.value} duration={2.5} />
                     <span className={`font-serif-italic italic ml-1 opacity-80 ${
-                      stat.value >= 1000 ? "text-xl sm:text-2xl" : "text-2xl sm:text-3xl"
+                      stat.value >= 1000 ? "text-lg sm:text-2xl" : "text-xl sm:text-3xl"
                     }`}>{stat.suffix}</span>
                   </div>
                   
                   {/* Subtle Accent Line */}
-                  <div className="h-1 w-12 bg-current mt-6 opacity-20 rounded-full group-hover:w-16 transition-all duration-700 ease-out" />
+                  <div className="h-1 w-10 sm:w-12 bg-current mt-4 sm:mt-6 opacity-20 rounded-full group-hover:w-16 transition-all duration-700 ease-out" />
                 </div>
               </motion.div>
             ))}
@@ -431,39 +431,39 @@ export default function Home() {
       </div>
 
       {/* Scattered Moodboard Section */}
-      <section className="py-16 md:py-24 section-dark overflow-hidden gsap-reveal">
+      <section className="py-12 sm:py-16 md:py-24 section-dark overflow-hidden gsap-reveal">
         <div className="container mx-auto px-4">
           <SectionHeader 
             eyebrow="Academy Life" 
-            title="The heart of our training." 
-            italicWord="heart"
+            title="What happens at practice." 
+            italicWord="practice"
             ctaLabel="Join the Team"
             ctaPath="/register"
             dark 
           />
-          <div className="mt-12">
+          <div className="mt-8 sm:mt-12">
             <Moodboard />
           </div>
         </div>
       </section>
 
       {/* Insights Section (Scrapbook Style) */}
-      <section className="py-16 md:py-24 section-dark gsap-reveal">
+      <section className="py-12 sm:py-16 md:py-24 section-dark gsap-reveal">
         <div className="container mx-auto px-4">
           <SectionHeader 
             eyebrow="Tips & News" 
-            title="Fresh stories from the court."
-            italicWord="stories"
-            ctaLabel="View All Articles"
+            title="A few things we've learned."
+            italicWord="learned"
+            ctaLabel="Read More"
             ctaPath="/about"
             dark
           />
           
-          <div className="grid md:grid-cols-3 gap-8 mt-12">
+          <div className="grid md:grid-cols-3 gap-6 sm:gap-8 mt-8 sm:mt-12">
             {[
-              { title: 'Mastering the Jump Float', date: 'Oct 12, 2024', image: ASSETS.EXPERTISE.FOUNDATIONAL, tag: 'Technical' },
-              { title: 'Nutrition for Peak Performance', date: 'Oct 08, 2024', image: ASSETS.EXPERTISE.ELITE, tag: 'Elite' },
-              { title: 'The Mental Game of Spiking', date: 'Sep 28, 2024', image: ASSETS.EXPERTISE.TACTICAL, tag: 'Tactical' },
+              { title: 'How to Improve Your Jump Float', date: 'Oct 12, 2024', image: ASSETS.EXPERTISE.FOUNDATIONAL, tag: 'Technical' },
+              { title: 'What to Eat Before a Game', date: 'Oct 08, 2024', image: ASSETS.EXPERTISE.ELITE, tag: 'Fitness' },
+              { title: 'Staying Calm When You\'re Down by Two Sets', date: 'Sep 28, 2024', image: ASSETS.EXPERTISE.TACTICAL, tag: 'Mental Game' },
             ].map((post, idx) => (
               <motion.div
                 key={idx}
@@ -474,12 +474,12 @@ export default function Home() {
                 transition={{ delay: idx * 0.1 }}
                 className="group relative cursor-pointer"
               >
-                <div className="relative rounded-2xl overflow-hidden aspect-[4/3] mb-5 shadow-xl">
+                <div className="relative rounded-2xl overflow-hidden aspect-[4/3] mb-4 sm:mb-5 shadow-xl">
                   <img src={post.image} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" loading="lazy" />
                   <div className="absolute inset-0 bg-espresso/20 group-hover:bg-espresso/0 transition-all" />
                   
                   {/* Sticker/Staged Badge */}
-                  <div className="absolute top-4 left-4 -rotate-12 bg-white text-espresso px-3 py-1 rounded-sm font-black text-[9px] uppercase tracking-widest shadow-xl">
+                  <div className="absolute top-3 sm:top-4 left-3 sm:left-4 -rotate-12 bg-white text-espresso px-2.5 sm:px-3 py-1 rounded-sm font-black text-[8px] sm:text-[9px] uppercase tracking-widest shadow-xl">
                     {post.tag}
                   </div>
                   
@@ -488,9 +488,9 @@ export default function Home() {
                     <p className="text-white text-[10px] font-bold bg-orange px-2.5 py-1 inline-block rotate-1">READ MORE →</p>
                   </div>
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-1.5 sm:space-y-2">
                   <p className="text-orange font-condensed text-[10px] tracking-[0.2em]">{post.date}</p>
-                  <h3 className="text-xl font-serif text-white group-hover:text-orange transition-colors leading-tight">
+                  <h3 className="text-lg sm:text-xl font-serif text-white group-hover:text-orange transition-colors leading-tight">
                     {post.title}
                   </h3>
                 </div>
@@ -501,7 +501,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 md:py-32 bg-orange relative overflow-hidden gsap-reveal">
+      <section className="py-16 sm:py-24 md:py-32 bg-orange relative overflow-hidden gsap-reveal">
         {/* Massive Background Text */}
         <div className="absolute inset-0 opacity-10 pointer-events-none select-none flex items-center justify-center">
           <div className="text-[25vw] font-serif font-black text-white/10 tracking-tighter transform rotate-[-5deg]">
@@ -525,15 +525,15 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <p className="text-white font-black uppercase tracking-[0.5em] text-xs mb-6">Ready to play?</p>
-            <h2 className="text-5xl sm:text-7xl font-serif text-white mb-10 leading-[0.85]">
-              Start your <br />
-              <span className="text-white font-serif-italic normal-case italic opacity-90">journey today.</span>
+            <p className="text-white font-black uppercase tracking-[0.35em] sm:tracking-[0.5em] text-[10px] sm:text-xs mb-4 sm:mb-6">Ready to play?</p>
+            <h2 className="text-4xl sm:text-6xl md:text-7xl font-serif text-white mb-8 sm:mb-10 leading-[0.9] md:leading-[0.85]">
+              Come train <br />
+              <span className="text-white font-serif-italic normal-case italic opacity-90">with us.</span>
             </h2>
             <div className="flex justify-center gap-6">
               <NavLink 
                 to="/register" 
-                className="bg-white text-orange px-10 py-5 rounded-full font-black text-base hover:bg-espresso hover:text-white transition-all shadow-2xl group flex items-center gap-3 uppercase tracking-widest"
+                className="bg-white text-orange px-8 sm:px-10 py-4 sm:py-5 rounded-full font-black text-sm sm:text-base hover:bg-espresso hover:text-white transition-all shadow-2xl group flex items-center gap-3 uppercase tracking-widest"
               >
                 Start Training
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />

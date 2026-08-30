@@ -32,7 +32,7 @@ export default function Waiver() {
   };
 
   return (
-    <div className="pt-24 pb-16 bg-ivory/50 min-h-screen font-sans">
+    <div className="pt-32 sm:pt-36 md:pt-40 pb-16 bg-ivory/50 min-h-screen font-sans">
       <div className="container mx-auto px-4">
         {/* Header Section */}
         <div className="gsap-reveal mb-10 text-center">
@@ -48,12 +48,12 @@ export default function Waiver() {
             <p className="text-orange font-black text-[10px] uppercase tracking-widest mb-2 flex items-center justify-center gap-2">
               <AlertCircle className="w-4 h-4" /> Legal Notice
             </p>
-            <p className="text-espresso/60 text-xs font-bold leading-relaxed italic">
+            <p className="text-espresso/80 text-xs font-bold leading-relaxed italic">
               "This waiver template should be reviewed and approved by a qualified California attorney before being used."
             </p>
           </div>
 
-          <p className="text-espresso/60 text-lg font-medium max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-espresso/85 text-lg font-medium max-w-2xl mx-auto mb-10 leading-relaxed">
             Please review our athletic participation agreement and liability release carefully. All participants must have a signed waiver on file.
           </p>
           
@@ -70,9 +70,9 @@ export default function Waiver() {
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-white rounded-[3rem] shadow-2xl border border-espresso/5 overflow-hidden"
+            className="bg-white rounded-[2rem] sm:rounded-[3rem] shadow-2xl border border-espresso/5 overflow-hidden"
           >
-            <div className="p-8 md:p-16">
+            <div className="p-5 sm:p-8 md:p-16">
               <div 
                 ref={waiverRef}
                 className="prose prose-sm max-w-none text-espresso/80 leading-relaxed"

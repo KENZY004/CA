@@ -19,6 +19,8 @@ export default function Performance() {
           alt="" 
           className="w-full h-full object-cover scale-110"
           aria-hidden="true"
+          decoding="async"
+          loading="lazy"
         />
         {/* Multilayered Blending Overlay */}
         <div className="absolute inset-0 bg-ivory/60" />
@@ -31,7 +33,7 @@ export default function Performance() {
         description="Track your progress with our high-performance volleyball analytics dashboard. Measure spikes, agility, and teamwork to reach your full potential."
       />
 
-      <div className="container mx-auto px-4 relative z-10 py-12 md:py-16">
+      <div className="container mx-auto px-4 relative z-10 pt-32 sm:pt-36 md:pt-40 pb-12 sm:pb-16">
         {/* Header */}
         <div className="gsap-reveal mb-14">
           <div className="flex flex-col lg:flex-row gap-10 items-start">
@@ -48,7 +50,7 @@ export default function Performance() {
               <h1 className="text-4xl md:text-6xl font-condensed font-black text-espresso uppercase tracking-tighter leading-[0.85] mb-6">
                 Precision <span className="text-[#D62828] italic">Feedback.</span>
               </h1>
-              <p className="text-espresso/60 text-base font-medium max-w-xl leading-relaxed">
+              <p className="text-espresso/85 text-base font-medium max-w-xl leading-relaxed">
                 We utilize advanced biomechanical tracking to quantify athletic growth. Our analytics engine provides real-time insights into velocity, precision, and strategic court coverage.
               </p>
             </motion.div>
@@ -57,6 +59,8 @@ export default function Performance() {
                  src={ASSETS.PERFORMANCE.ANALYTICS_HERO} 
                  alt="Performance Analytics Visualization" 
                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
+                 decoding="async"
+                 loading="lazy"
                />
                <div className="absolute inset-0 bg-gradient-to-t from-espresso/40 via-transparent to-transparent" />
                

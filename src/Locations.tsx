@@ -60,9 +60,17 @@ export default function Locations() {
                   <MapPin className="w-5 h-5" />
                 </div>
                 <h4 className="text-xl font-serif mb-1.5">{loc.name}</h4>
-                <p className={`text-xs leading-relaxed mb-4 opacity-70`}>{loc.address}, {loc.city}</p>
-                <div className="pt-4 border-t border-black/5">
+                <p className="text-xs leading-relaxed mb-4 opacity-70">{loc.address}, {loc.city}</p>
+                <div className="pt-4 border-t border-black/5 flex items-center justify-between">
                    <p className={`text-[9px] font-black uppercase tracking-[0.2em] opacity-80`}>{loc.description}</p>
+                   <a 
+                     href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(loc.name + ' ' + loc.address + ' ' + loc.city)}`}
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className="text-[9px] font-black uppercase tracking-widest flex items-center gap-1 hover:underline shrink-0 ml-2"
+                   >
+                     Directions <ChevronRight className="w-3 h-3" />
+                   </a>
                 </div>
               </div>
             ))}
@@ -121,7 +129,7 @@ export default function Locations() {
           </div>
 
           {/* Map Container */}
-          <div className="lg:col-span-2 relative h-[450px] lg:h-auto rounded-[2.5rem] overflow-hidden shadow-xl border-4 border-white bg-[#F9BC00] group">
+          <div className="lg:col-span-2 relative h-[350px] sm:h-[450px] lg:h-auto min-h-[350px] lg:min-h-[500px] rounded-[1.5rem] sm:rounded-[2.5rem] overflow-hidden shadow-xl border-4 border-white bg-[#F9BC00] group">
             <APIProvider apiKey={API_KEY} version="weekly">
               <Map
                 center={selectedLocation.coords}
@@ -140,13 +148,18 @@ export default function Locations() {
             </APIProvider>
             
             {/* Overlay Info Card */}
-            <div className="absolute bottom-6 right-6 left-6 md:left-auto bg-[#1A1A1A] p-5 rounded-[1.5rem] shadow-xl border border-white/10 max-w-xs text-white">
-              <div className="text-[9px] font-black text-[#F9BC00] uppercase tracking-[0.3em] mb-2">Facility Details</div>
-              <h4 className="font-serif text-lg mb-2">{selectedLocation.name}</h4>
-              <p className="text-xs text-white/60 leading-relaxed mb-4">{selectedLocation.description}</p>
-              <button className="w-full bg-[#D62828] text-white py-3 rounded-xl font-bold uppercase tracking-widest text-[9px] hover:bg-white hover:text-espresso transition-all flex items-center justify-center gap-2">
-                Get Directions <ChevronRight className="w-3.5 h-3.5" />
-              </button>
+            <div className="absolute bottom-4 right-4 left-4 sm:bottom-6 sm:right-6 sm:left-auto bg-[#1A1A1A] p-4 sm:p-5 rounded-[1.25rem] sm:rounded-[1.5rem] shadow-xl border border-white/10 max-w-xs text-white">
+              <div className="text-[9px] font-black text-[#F9BC00] uppercase tracking-[0.3em] mb-1.5 sm:mb-2">Facility Details</div>
+              <h4 className="font-serif text-base sm:text-lg mb-1.5 sm:mb-2">{selectedLocation.name}</h4>
+              <p className="text-xs text-white/60 leading-relaxed mb-3 sm:mb-4">{selectedLocation.description}</p>
+              <a 
+                href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedLocation.name + ' ' + selectedLocation.address + ' ' + selectedLocation.city)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full bg-[#D62828] text-white py-2.5 sm:py-3 rounded-xl font-bold uppercase tracking-widest text-[9px] hover:bg-white hover:text-espresso transition-all flex items-center justify-center gap-2"
+              >
+                Get Directions <ChevronRight className="w-3 h-3" />
+              </a>
             </div>
           </div>
         </div>

@@ -12,17 +12,17 @@ export const useGsapReveal = () => {
       reveals.forEach((el) => {
         gsap.fromTo(el, 
           { 
-            y: 60, 
+            y: 24, 
             opacity: 0 
           }, 
           {
             y: 0,
             opacity: 1,
-            duration: 1.2,
-            ease: 'power3.out',
+            duration: 0.6,
+            ease: 'power2.out',
             scrollTrigger: {
               trigger: el,
-              start: 'top 85%',
+              start: 'top 92%',
               toggleActions: 'play none none none'
             }
           }
@@ -30,7 +30,12 @@ export const useGsapReveal = () => {
       });
     });
 
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 50);
+
     return () => {
+      clearTimeout(timer);
       ctx.revert();
     };
   }, []);

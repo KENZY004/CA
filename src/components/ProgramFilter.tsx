@@ -8,29 +8,29 @@ interface ProgramFilterProps {
 
 export default function ProgramFilter({ categories, activeCategory, onCategoryChange }: ProgramFilterProps) {
   return (
-    <div className="flex flex-wrap justify-center gap-2 mb-20 bg-espresso/5 p-1.5 rounded-[2rem] border border-espresso/5">
+    <div className="flex flex-wrap justify-center gap-1.5 p-1.5 bg-white/95 backdrop-blur-md rounded-full border border-black/10 shadow-lg">
       {categories.map((category) => (
         <button
           key={category}
           onClick={() => onCategoryChange(category)}
-          className="group relative px-8 py-3 transition-all duration-300 rounded-full overflow-hidden"
+          className="group relative px-6 sm:px-8 py-2.5 sm:py-3 transition-all duration-300 rounded-full overflow-hidden"
         >
-          {/* Background Highlight */}
+          {/* Active Pill Background */}
           {activeCategory === category && (
             <motion.div
               layoutId="activeFilter"
-              className="absolute inset-0 bg-yellow shadow-xl"
+              className="absolute inset-0 bg-[#F9BC00] rounded-full shadow-md"
               transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
             />
           )}
           
           {/* Label */}
-          <span className={`relative z-10 text-[10px] font-black tracking-[0.2em] uppercase transition-colors duration-300 ${
+          <span className={`relative z-10 text-[10px] sm:text-[11px] font-black tracking-[0.2em] uppercase transition-colors duration-300 ${
             activeCategory === category 
-              ? 'text-espresso'
-              : 'text-espresso/40 group-hover:text-espresso'
+              ? 'text-espresso' 
+              : 'text-espresso/80 group-hover:text-[#D62828]'
           }`}>
-            {category === 'all' ? 'All Path' : `Age ${category}`}
+            {category === 'all' ? 'All Programs' : `Age ${category}`}
           </span>
         </button>
       ))}

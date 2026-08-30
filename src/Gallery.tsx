@@ -177,7 +177,7 @@ export default function Gallery() {
   };
 
   return (
-    <div className="bg-[#FBF9F6] min-h-screen pt-28 pb-16 overflow-x-hidden flex flex-col justify-between">
+    <div className="bg-[#FBF9F6] min-h-screen pt-32 sm:pt-36 md:pt-40 pb-12 sm:pb-16 overflow-x-hidden flex flex-col justify-between">
       <SEO
         title="Academy Gallery"
         description="Browse through the highlights of Challengers Volleyball Academy. Photos and videos of our training sessions, matches, and community events."

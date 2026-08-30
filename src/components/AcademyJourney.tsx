@@ -17,7 +17,7 @@ const MILESTONES: Milestone[] = [
   {
     id: 1,
     title: "Foundations",
-    description: "Mastering the core mechanics and building athletic confidence from day one.",
+    description: "Learning the basics — how to pass, serve, and move on the court.",
     x: 20,
     y: 48,
     image: ASSETS.JOURNEY.STEP_1
@@ -25,7 +25,7 @@ const MILESTONES: Milestone[] = [
   {
     id: 2,
     title: "Specialization",
-    description: "Developing position-specific skills and tactical understanding of the game.",
+    description: "Picking a position and getting good at what that role demands.",
     x: 45,
     y: 75,
     image: ASSETS.JOURNEY.STEP_2
@@ -33,7 +33,7 @@ const MILESTONES: Milestone[] = [
   {
     id: 3,
     title: "Performance",
-    description: "High-intensity training focused on power, speed, and mental resilience.",
+    description: "Training harder, thinking faster, and competing under pressure.",
     x: 70,
     y: 42,
     image: ASSETS.JOURNEY.STEP_3
@@ -41,7 +41,7 @@ const MILESTONES: Milestone[] = [
   {
     id: 4,
     title: "Mastery",
-    description: "Elite level competition and pathway to professional opportunities.",
+    description: "Playing at a high level and chasing bigger opportunities.",
     x: 88,
     y: 65,
     image: ASSETS.JOURNEY.STEP_4
@@ -208,19 +208,19 @@ export default function AcademyJourney() {
 
   if (isMobile) {
     return (
-      <section className="relative w-full bg-gradient-to-br from-[#fff7ed] to-[#fef3c7] py-14 px-6 overflow-hidden">
+      <section className="relative w-full bg-gradient-to-br from-[#fff7ed] to-[#fef3c7] py-10 sm:py-14 px-4 sm:px-6 overflow-hidden">
         <div className="max-w-xl mx-auto">
-          <div className="mb-20">
-            <h2 className="text-5xl font-serif text-[#0f172a] leading-tight mb-4">
+          <div className="mb-8 sm:mb-12">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-serif text-[#0f172a] leading-tight mb-3 sm:mb-4">
               Your journey to <br />
               <span className="italic font-light bg-clip-text text-transparent bg-gradient-to-r from-[#b91c1c] to-[#ea580c] pr-4">the top.</span>
             </h2>
             <div className="w-12 h-1 bg-[#ea580c] rounded-full" />
           </div>
 
-          <div className="space-y-12 relative">
+          <div className="space-y-8 sm:space-y-12 relative">
             {/* Vertical Line */}
-            <div className="absolute left-6 top-4 bottom-4 w-px bg-slate-200 border-l border-dashed border-slate-300" />
+            <div className="absolute left-5 sm:left-6 top-4 bottom-4 w-px bg-slate-200 border-l border-dashed border-slate-300" />
             
             {MILESTONES.map((m) => (
               <motion.div 
@@ -228,20 +228,20 @@ export default function AcademyJourney() {
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                className="relative pl-16"
+                className="relative pl-12 sm:pl-16"
               >
                 {/* Dot */}
-                <div className="absolute left-0 top-6 w-12 h-12 flex items-center justify-center">
-                  <div className="w-4 h-4 bg-slate-900 rounded-full shadow-lg ring-4 ring-white" />
+                <div className="absolute left-0 top-6 w-10 sm:w-12 h-10 sm:h-12 flex items-center justify-center">
+                  <div className="w-3.5 sm:w-4 h-3.5 sm:h-4 bg-slate-900 rounded-full shadow-lg ring-4 ring-white" />
                 </div>
                 
-                <div className="bg-white/95 backdrop-blur-md p-8 rounded-[2rem] border border-black/5 shadow-lg">
-                  <span className="text-[10px] font-bold text-[#b91c1c] block mb-2 tracking-widest uppercase">PHASE 0{m.id}</span>
-                  <h3 className="text-2xl font-black text-slate-700 uppercase tracking-tighter mb-4">{m.title}</h3>
-                  <div className="aspect-video w-full rounded-2xl overflow-hidden mb-4 border border-black/5">
+                <div className="bg-white/95 backdrop-blur-md p-5 sm:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-black/5 shadow-lg">
+                  <span className="text-[9px] sm:text-[10px] font-bold text-[#b91c1c] block mb-1.5 sm:mb-2 tracking-widest uppercase">PHASE 0{m.id}</span>
+                  <h3 className="text-lg sm:text-2xl font-black text-slate-700 uppercase tracking-tighter mb-3 sm:mb-4">{m.title}</h3>
+                  <div className="aspect-video w-full rounded-xl sm:rounded-2xl overflow-hidden mb-3 sm:mb-4 border border-black/5">
                     <OptimizedImage src={m.image} className="w-full h-full object-cover" alt={m.title} />
                   </div>
-                  <p className="text-[11px] text-slate-500 leading-relaxed font-semibold uppercase tracking-[0.1em]">
+                  <p className="text-[10px] sm:text-[11px] text-slate-500 leading-relaxed font-semibold uppercase tracking-[0.08em] sm:tracking-[0.1em]">
                     {m.description}
                   </p>
                 </div>

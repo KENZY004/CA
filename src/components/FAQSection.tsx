@@ -9,28 +9,28 @@ interface FAQ {
 
 const faqs: FAQ[] = [
   {
-    question: "What age groups does Challengers Academy train?",
-    answer: "We primarily train athletes between the ages of 10 and 18. Our programs are divided into specific phases (Foundational to Elite) to ensure every player receives coaching tailored to their physical and technical maturity."
+    question: "What age groups do you train?",
+    answer: "We mostly work with kids and teens between 10 and 18 years old. We split players into groups based on their skill level — not just their age — so everyone gets coaching that actually fits where they are."
   },
   {
-    question: "Do you accept absolute beginners?",
-    answer: "Yes! Our 'Phase 01: Foundational Mastery' is specifically designed for athletes who are new to the sport. We focus on establishing proper biomechanics and basic ball control before progressing to tactical play."
+    question: "Can my child join if they've never played before?",
+    answer: "Absolutely. We have a beginner group specifically for players who are just starting out. We go over the basics — how to pass, how to position, how to move — before anything more advanced."
   },
   {
-    question: "What is the typical training schedule?",
-    answer: "Most of our training sessions take place in the evenings on weekdays and during the morning/afternoon on weekends. Specific schedules depend on your assigned training phase and location. Registered members receive access to our full digital calendar."
+    question: "When are the training sessions?",
+    answer: "We typically train on weekday evenings and weekend mornings. The exact schedule depends on which group you're in and which location you pick. Once you register, we'll share the full schedule with you."
   },
   {
-    question: "Where are your training facilities located?",
-    answer: "Challengers Academy currently operates in prime athletic facilities across the San Francisco Bay Area, with major hubs in Silicon Valley and the East Bay. We select locations with high-quality flooring and professional-grade nets."
+    question: "Where are you located?",
+    answer: "We currently run sessions in Fremont, Tracy, and San Leandro in the Bay Area. We always make sure to book gyms with good flooring and proper nets."
   },
   {
-    question: "What equipment do athletes need to bring?",
-    answer: "Athletes should come prepared with non-marking indoor court shoes (volleyball-specific preferred), comfortable athletic wear, knee pads, and a reusable water bottle. We provide all professional-grade volleyballs and training equipment."
+    question: "What should my child bring to practice?",
+    answer: "Indoor court shoes (non-marking soles), comfortable workout clothes, knee pads, and a water bottle. We have all the volleyballs and other training gear — you don't need to bring any of that."
   },
   {
-    question: "How do the Elite training phases work?",
-    answer: "Our academy follows a 5-Phase Development Model. Progression is based on merit and skill mastery rather than age alone. Coaches evaluate athletes periodically to determine if they are ready to advance to more complex tactical training."
+    question: "How does moving up to a higher level work?",
+    answer: "We have 5 training levels. Players move up when they're genuinely ready — our coaches assess each player regularly and let families know when it's time to step up. It's always based on skill, not just how long they've been attending."
   }
 ];
 

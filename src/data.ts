@@ -6,7 +6,7 @@ export const PROGRAMS: Program[] = [
     id: 'little-spikers',
     title: 'Little Spikers',
     description: 'Introduction to volleyball for the youngest athletes.',
-    longDescription: 'Our Little Spikers program focuses on basic coordination, motor skills, and an introduction to the very basics of volleyball in a fun, non-competitive environment. Perfect for building early interest and confidence.',
+    longDescription: 'Little Spikers is for kids who are brand new to the sport. We keep it fun, age-appropriate, and focused on the basics — how to move, how to hit, and how to work as a team. No prior experience needed.',
     image: ASSETS.EXPERTISE.FOUNDATIONAL,
     ageRange: '5 - 10',
     ageGroups: ['5-10'],
@@ -16,7 +16,7 @@ export const PROGRAMS: Program[] = [
     id: 'youth-foundations',
     title: 'Youth Foundations',
     description: 'Building technical precision and core mechanics.',
-    longDescription: 'Designed for middle-school aged athletes, this program dives deeper into technical mechanics. We focus on consistent passing, overhead serving, and basic offensive rotations to prepare players for school and club tryouts.',
+    longDescription: 'This group is for middle-school players who already know the basics and want to get sharper. We work on cleaner passing, better serving, and how to run simple plays — so players are ready for school or club tryouts.',
     image: ASSETS.EXPERTISE.TACTICAL,
     ageRange: '11 - 14',
     ageGroups: ['11-14'],
@@ -26,7 +26,7 @@ export const PROGRAMS: Program[] = [
     id: 'high-school-prep',
     title: 'High School Prep',
     description: 'Advanced tactical systems and elite performance.',
-    longDescription: 'For dedicated high school athletes, this intensive program focuses on high-level offensive and defensive systems. We emphasize positional specialization, court IQ, and the mental toughness required for varsity competition.',
+    longDescription: 'For high school players who are serious about the game. We go deep on offensive and defensive systems, position-specific skills, and the mindset needed to compete at the varsity level. College-prep support is included for those who want it.',
     image: ASSETS.EXPERTISE.ELITE,
     ageRange: '15 - 18',
     ageGroups: ['15-18'],
@@ -36,7 +36,7 @@ export const PROGRAMS: Program[] = [
     id: 'all-ages-clinics',
     title: 'Open Skills Clinics',
     description: 'Targeted skill development for all experience levels.',
-    longDescription: 'These sessions are designed for specific skill work—like setting or hitting—and are open to all ages. We group athletes by skill level rather than age to ensure everyone is challenged appropriately.',
+    longDescription: 'These open sessions focus on one skill at a time — setting, hitting, passing, or serving. Open to all ages. We group players by what they can actually do, not how old they are, so no one is out of place.',
     image: ASSETS.JOURNEY.STEP_1,
     ageRange: '5 - 18',
     ageGroups: ['5-10', '11-14', '15-18'],
@@ -46,7 +46,7 @@ export const PROGRAMS: Program[] = [
     id: 'competitive-league',
     title: 'Junior Academy League',
     description: 'Internal league play for real-game experience.',
-    longDescription: 'Put your skills to the test in our internal academy league. This program is for athletes who want the thrill of competition without the travel commitment of club volleyball. Focus on game strategy and team dynamics.',
+    longDescription: 'This is our in-house league for players who want real match experience. Games are held within the academy so you get all the excitement of competition without the travel. Great for building confidence and learning how to play under pressure.',
     image: ASSETS.JOURNEY.STEP_2,
     ageRange: '11 - 18',
     ageGroups: ['11-14', '15-18'],
@@ -74,21 +74,21 @@ export const TESTIMONIALS: Testimonial[] = [
     id: 1,
     name: "Sarah Jenkins",
     role: "Middle Blocker, U17 Elite",
-    content: "The data-driven approach at Challengers changed everything for me. Seeing my vertical jump increase by 4 inches in just three months was incredibly motivating.",
+    content: "I was honestly surprised by how much I improved in just a few months. My jump got better, my reading of the game got better, and I actually started enjoying practice more.",
     avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&h=200&auto=format&fit=crop"
   },
   {
     id: 2,
     name: "Marcus Chen",
     role: "Setter, Varsity Captain",
-    content: "The technical precision I've gained here is unmatched. The coaches don't just tell you what to do; they show you the mechanics behind every movement.",
+    content: "Coach Wilson doesn't just tell you what to do — he breaks down exactly why. That made a big difference for me as a setter. I finally understood the game, not just the plays.",
     avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=200&h=200&auto=format&fit=crop"
   },
   {
     id: 3,
     name: "Elena Rodriguez",
     role: "Libero, Regional MVP",
-    content: "I've trained at many academies, but the community and professional atmosphere here are special. It's where athletes become leaders.",
+    content: "I've been to other programs and this one feels different. Everyone knows each other, the coaches actually care, and you can see yourself getting better week after week.",
     avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200&h=200&auto=format&fit=crop"
   }
 ];
@@ -101,7 +101,7 @@ export const LOCATIONS: Location[] = [
     city: 'Fremont',
     zip: '94538',
     coords: { lat: 37.5342, lng: -121.9682 },
-    description: 'Our primary facility in Fremont, offering full-court access and modern training equipment.'
+    description: 'Our main training spot in Fremont. Full court, good space, easy to find.'
   },
   {
     id: 'tracy',
@@ -110,7 +110,7 @@ export const LOCATIONS: Location[] = [
     city: 'Tracy',
     zip: '95391',
     coords: { lat: 37.7314, lng: -121.5204 },
-    description: 'State-of-the-art gymnasium at Bethany Elementary School, perfect for youth clinics and team practices.'
+    description: 'A well-maintained gym at Bethany Elementary — great for youth sessions and team practice.'
   },
   {
     id: 'san-leandro',
@@ -119,7 +119,7 @@ export const LOCATIONS: Location[] = [
     city: 'San Leandro',
     zip: '94578',
     coords: { lat: 37.7019, lng: -122.1388 },
-    description: 'Outdoor and indoor facilities at Halcyon Park, ideal for skill-focused drills and community sessions.'
+    description: 'Both indoor and outdoor space at Halcyon Park — good for drills and community training sessions.'
   }
 ];
 

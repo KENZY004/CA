@@ -32,7 +32,7 @@ const PLANS = [
 
 export default function Pricing() {
   return (
-    <div className="py-16 md:py-20 bg-[#FBF9F6] min-h-screen">
+    <div className="pt-32 sm:pt-36 md:pt-40 pb-16 md:pb-20 bg-[#FBF9F6] min-h-screen">
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -86,7 +86,7 @@ export default function Pricing() {
               </ul>
 
               <NavLink
-                to="/register"
+                to={`/register?program=${encodeURIComponent(plan.name.toLowerCase().replace(/\s+/g, '-'))}`}
                 className={`w-full py-3.5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all
                   ${plan.name === 'Competition Plus' ? 'bg-[#F9BC00] text-espresso hover:bg-white' : 
                     plan.name === 'Monthly Elite' ? 'bg-white text-espresso hover:bg-espresso hover:text-white' : 

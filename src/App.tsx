@@ -119,6 +119,7 @@ export default function App() {
               <Route path="/performance" element={<Performance />} />
               <Route path="/waiver" element={<Waiver />} />
               <Route path="/login" element={<Login />} />
+              <Route path="*" element={<Home />} />
             </Routes>
           </Suspense>
         </main>

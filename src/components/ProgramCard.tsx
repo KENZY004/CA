@@ -86,7 +86,7 @@ const ProgramCard: React.FC<ProgramCardProps> = ({ program, index }) => {
         </div>
 
         <NavLink 
-          to="/register" 
+          to={`/register?program=${encodeURIComponent(program.id)}`} 
           className="relative inline-flex items-center justify-between w-full bg-espresso text-white px-6 py-3.5 rounded-xl font-bold uppercase tracking-widest text-[10px] overflow-hidden group/btn"
         >
           <div className="absolute inset-0 bg-yellow translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500" />
