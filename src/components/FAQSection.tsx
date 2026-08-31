@@ -42,36 +42,36 @@ export default function FAQSection() {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto">
-      <div className="space-y-4">
+    <div className="w-full max-w-3xl mx-auto">
+      <div className="space-y-2.5 sm:space-y-3">
         {faqs.map((faq, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
-            className={`rounded-[2rem] border transition-all duration-500 overflow-hidden ${
+            transition={{ delay: index * 0.06 }}
+            className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
               activeIndex === index 
-                ? 'bg-white border-espresso/10 shadow-2xl' 
-                : 'bg-white/40 border-espresso/5 hover:border-espresso/10 shadow-sm'
+                ? 'bg-white border-espresso/10 shadow-md' 
+                : 'bg-white/60 border-espresso/5 hover:border-espresso/10 shadow-xs'
             }`}
           >
             <button
               onClick={() => toggleFAQ(index)}
-              className="w-full px-8 py-8 flex items-center justify-between text-left group"
+              className="w-full px-5 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between text-left group"
             >
-              <span className={`text-lg font-serif transition-colors duration-300 ${
+              <span className={`text-sm sm:text-base font-serif transition-colors duration-300 ${
                 activeIndex === index ? 'text-crimson' : 'text-espresso'
               }`}>
                 {faq.question}
               </span>
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 ${
+              <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-all duration-300 shrink-0 ml-3 ${
                 activeIndex === index 
                   ? 'bg-crimson text-white rotate-180' 
                   : 'bg-espresso/5 text-espresso group-hover:bg-espresso/10'
               }`}>
-                {activeIndex === index ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                {activeIndex === index ? <Minus className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
               </div>
             </button>
             
@@ -81,11 +81,11 @@ export default function FAQSection() {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <div className="px-8 pb-8">
-                    <div className="h-px w-12 bg-crimson/20 mb-6" />
-                    <p className="text-espresso/60 leading-relaxed font-medium">
+                  <div className="px-5 sm:px-6 pb-4 sm:pb-5 pt-0">
+                    <div className="h-px w-8 bg-crimson/20 mb-3" />
+                    <p className="text-xs sm:text-sm text-espresso/70 leading-relaxed font-normal">
                       {faq.answer}
                     </p>
                   </div>
