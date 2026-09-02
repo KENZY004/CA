@@ -92,8 +92,8 @@ function MilestoneItem({ m, smoothProgress }: { m: Milestone, smoothProgress: an
   // Calculate threshold based on new X positions (range 20 to 88 -> span of 68)
   const threshold = (m.x - 20) / 68; 
   
-  const scale = useTransform(smoothProgress, [Math.max(0, threshold - 0.05), Math.min(1, threshold + 0.05)], [0, 1]);
-  const opacity = useTransform(smoothProgress, [Math.max(0, threshold - 0.05), Math.min(1, threshold + 0.05)], [0, 1]);
+  const scale = useTransform(smoothProgress, [Math.max(0, threshold - 0.08), Math.min(1, threshold + 0.02)], [0, 1]);
+  const opacity = useTransform(smoothProgress, [Math.max(0, threshold - 0.08), Math.min(1, threshold + 0.02)], [0, 1]);
 
   return (
     <div 
@@ -149,7 +149,7 @@ export default function AcademyJourney() {
     offset: ["start start", "end end"]
   });
 
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 70, damping: 20, restDelta: 0.001 });
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 50, damping: 20, restDelta: 0.0005 });
   const pathFlowOffset = useTransform(smoothProgress, [0, 1], [0, -40]); 
 
   const [trail, setTrail] = useState<TrailImage[]>([]);
@@ -254,7 +254,7 @@ export default function AcademyJourney() {
   }
 
   return (
-    <section ref={containerRef} className="relative w-full h-[300vh] bg-gradient-to-br from-[#fff7ed] via-[#ffedd5] to-[#fef3c7] cursor-none" aria-label="Academy Journey Timeline">
+    <section ref={containerRef} className="relative w-full h-[380vh] bg-gradient-to-br from-[#fff7ed] via-[#ffedd5] to-[#fef3c7] cursor-none" aria-label="Academy Journey Timeline">
       
       <div 
         onMouseMove={handleMouseMove}

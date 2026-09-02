@@ -32,22 +32,15 @@ export default function Home() {
     offset: ["start start", "end end"]
   });
 
-  const { scrollYProgress: missionProgress } = useScroll({
-    target: missionRef,
-    offset: ["start end", "end start"]
-  });
+  const y1 = useTransform(scrollYProgress, [0, 0.15], [0, -35]);
+  const y2 = useTransform(scrollYProgress, [0, 0.15], [0, -20]);
+  const y3 = useTransform(scrollYProgress, [0, 0.15], [0, -45]);
+  const y4 = useTransform(scrollYProgress, [0, 0.15], [0, -25]);
 
-  const missionY = useTransform(missionProgress, [0, 1], [-100, 100]);
-
-  const y1 = useTransform(scrollYProgress, [0, 0.2], [0, -100]);
-  const y2 = useTransform(scrollYProgress, [0, 0.2], [0, -60]);
-  const y3 = useTransform(scrollYProgress, [0, 0.2], [0, -140]);
-  const y4 = useTransform(scrollYProgress, [0, 0.2], [0, -80]);
-
-  const r1 = useTransform(scrollYProgress, [0, 0.2], [-8, -15]);
-  const r2 = useTransform(scrollYProgress, [0, 0.2], [5, 12]);
-  const r3 = useTransform(scrollYProgress, [0, 0.2], [-3, -10]);
-  const r4 = useTransform(scrollYProgress, [0, 0.2], [8, 18]);
+  const r1 = useTransform(scrollYProgress, [0, 0.15], [-8, -11]);
+  const r2 = useTransform(scrollYProgress, [0, 0.15], [5, 8]);
+  const r3 = useTransform(scrollYProgress, [0, 0.15], [-3, -6]);
+  const r4 = useTransform(scrollYProgress, [0, 0.15], [8, 11]);
 
   return (
     <div ref={containerRef} className="flex flex-col">

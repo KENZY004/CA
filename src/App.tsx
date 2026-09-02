@@ -51,10 +51,10 @@ function SmoothScroll() {
     if (isTouch) return;
 
     const lenis = new Lenis({
-      duration: 0.9,
+      duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 0.9,
+      wheelMultiplier: 0.85,
       infinite: false,
     });
 
@@ -62,18 +62,16 @@ function SmoothScroll() {
 
     lenis.on('scroll', ScrollTrigger.update);
 
-    let rafId: number;
-    const raf = (time: number) => {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
+    const update = (time: number) => {
+      lenis.raf(time * 1000);
     };
 
-    rafId = requestAnimationFrame(raf);
+    gsap.ticker.add(update);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      gsap.ticker.remove(update);
       lenis.destroy();
-      cancelAnimationFrame(rafId);
       lenisRef.current = null;
     };
   }, []);

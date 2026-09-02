@@ -80,13 +80,13 @@ export default function ExpertiseSection() {
           anticipatePin: 1,
         });
 
-        // 1. Scrubbed Background Color Timeline
+        // 1. Scrubbed Background Color Timeline with smooth scrub
         const bgTl = gsap.timeline({
           scrollTrigger: {
             trigger: leftColRef.current,
             start: "top center",
             end: "bottom center",
-            scrub: true,
+            scrub: 0.8,
           }
         });
 
@@ -94,30 +94,30 @@ export default function ExpertiseSection() {
           if (index === 0) return;
           bgTl.to(sectionRef.current, { 
             backgroundColor: color,
-            ease: "none"
+            ease: "power1.inOut"
           });
         });
 
-        // 2. Snap transitions for images and dots
+        // 2. Smooth transitions for images, dots, and active card
         cards.forEach((card: any, index: number) => {
           ScrollTrigger.create({
             trigger: card,
-            start: "top center", 
-            end: "bottom center",
+            start: "top center+=10%", 
+            end: "bottom center-=10%",
             onToggle: (self) => {
               if (self.isActive) {
                 setActiveIdx(index);
                 // Crossfade images smoothly
-                gsap.to(images, { opacity: 0, scale: 1.05, duration: 0.6, ease: "power2.inOut", overwrite: "auto" });
-                gsap.to(images[index], { opacity: 1, scale: 1, duration: 0.6, ease: "power2.inOut", overwrite: "auto" });
+                gsap.to(images, { opacity: 0, scale: 1.04, duration: 0.7, ease: "power2.out", overwrite: "auto" });
+                gsap.to(images[index], { opacity: 1, scale: 1, duration: 0.7, ease: "power2.out", overwrite: "auto" });
 
                 // Update dots
-                gsap.to(dots, { backgroundColor: 'rgba(255, 255, 255, 0.3)', scale: 1, duration: 0.3, overwrite: "auto" });
-                gsap.to(dots[index], { backgroundColor: '#ffffff', scale: 1.5, duration: 0.3, overwrite: "auto" });
+                gsap.to(dots, { backgroundColor: 'rgba(255, 255, 255, 0.3)', scale: 1, duration: 0.4, overwrite: "auto" });
+                gsap.to(dots[index], { backgroundColor: '#ffffff', scale: 1.5, duration: 0.4, overwrite: "auto" });
 
                 // Highlight active text, dim others
-                gsap.to(cards, { opacity: 0.25, duration: 0.4, ease: "power2.inOut", overwrite: "auto" });
-                gsap.to(card, { opacity: 1, duration: 0.4, ease: "power2.inOut", overwrite: "auto" });
+                gsap.to(cards, { opacity: 0.3, duration: 0.5, ease: "power2.out", overwrite: "auto" });
+                gsap.to(card, { opacity: 1, duration: 0.5, ease: "power2.out", overwrite: "auto" });
               }
             }
           });
@@ -149,12 +149,12 @@ export default function ExpertiseSection() {
 
         <div className="relative flex flex-col lg:flex-row gap-12 lg:gap-16">
           
-          {/* Left Column: Scrolling Text */}
-          <div ref={leftColRef} className="w-full lg:w-5/12 flex flex-row overflow-x-auto snap-x snap-mandatory gap-6 sm:gap-10 pb-6 lg:flex-col lg:overflow-x-visible lg:gap-[20vh] lg:pb-[10vh] lg:snap-none no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
+          {/* Left Column: Scrolling Text with comfortable reading heights */}
+          <div ref={leftColRef} className="w-full lg:w-5/12 flex flex-row overflow-x-auto snap-x snap-mandatory gap-6 sm:gap-10 pb-6 lg:flex-col lg:overflow-x-visible lg:gap-[35vh] lg:py-[10vh] lg:pb-[30vh] lg:snap-none no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0">
             {PROGRAMS.map((program, idx) => (
               <div
                 key={program.id}
-                className="expertise-card flex flex-col justify-center shrink-0 w-[85vw] sm:w-[70vw] lg:w-full snap-center"
+                className="expertise-card flex flex-col justify-center shrink-0 w-[85vw] sm:w-[70vw] lg:w-full lg:min-h-[45vh] snap-center"
                 role="article"
                 aria-labelledby={`expertise-title-${program.id}`}
               >
