@@ -12,14 +12,29 @@ import SEO from './components/SEO';
 
 export default function Programs() {
   const [activeCategory, setActiveCategory] = useState('all');
+  const [programsList, setProgramsList] = useState<any[]>(PROGRAMS);
   
   useGsapReveal();
+
+  useEffect(() => {
+    fetch('/api/programs')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.programs?.length) {
+          const uniqueProgs = Array.from(new Map(data.programs.map((p: any) => [p.id, p])).values());
+          setProgramsList(uniqueProgs);
+        }
+      })
+      .catch(() => {
+        // Silently fallback to static data
+      });
+  }, []);
 
   const categories = ['all', '5-10', '11-14', '15-18'];
 
   const filteredPrograms = activeCategory === 'all' 
-    ? PROGRAMS 
-    : PROGRAMS.filter(p => p.ageGroups.includes(activeCategory));
+    ? programsList 
+    : programsList.filter(p => p.ageGroups && p.ageGroups.includes(activeCategory));
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const programScrollRef = useRef<HTMLDivElement>(null);
@@ -165,71 +180,116 @@ export default function Programs() {
           >
             {[
               { 
-                title: 'Starter Pack', 
+                id: 'gym-training-4',
+                title: 'Gym Training (4 Sessions)', 
                 fee: '$200', 
-                sessions: '4 Coaching Sessions', 
+                sessions: '4 Gym Sessions', 
                 duration: '2 Hours per Session',
+                students: 'Group Training',
                 popular: false,
                 bgColor: 'bg-[#F9BC00]',
                 textColor: 'text-espresso'
               },
               { 
-                title: 'Get Serious', 
+                id: 'gym-training-12',
+                title: 'Gym Training (12 Sessions)', 
                 fee: '$550', 
-                sessions: '12 Intensive Sessions', 
+                sessions: '12 Intensive Gym Sessions', 
                 duration: '2 Hours per Session',
+                students: 'Group Training',
                 popular: true,
                 bgColor: 'bg-[#D62828]',
                 textColor: 'text-white'
               },
               { 
-                title: 'All In', 
-                fee: '$900', 
-                sessions: '20 Training Sessions', 
+                id: 'open-park-group',
+                title: 'Open Park Group Training', 
+                fee: '$150', 
+                sessions: '4 Outdoor Sessions', 
                 duration: '2 Hours per Session',
+                students: 'Per Student (Group)',
                 popular: false,
                 bgColor: 'bg-[#1A1A1A]',
                 textColor: 'text-white'
               },
               { 
-                title: 'Team Package', 
-                fee: '$1200', 
-                sessions: 'Group Coaching', 
-                duration: 'Custom Schedule',
+                id: 'open-park-private',
+                title: 'Open Park (Private 1-on-1)', 
+                fee: '$360', 
+                sessions: '4 Private Sessions', 
+                duration: '1 Hour per Session',
+                students: '1 Student Dedicated',
+                popular: false,
+                bgColor: 'bg-white',
+                textColor: 'text-espresso'
+              },
+              { 
+                id: 'open-park-travel',
+                title: 'Open Park (Travel Coaching)', 
+                fee: '$320', 
+                sessions: '4 Private Sessions', 
+                duration: '1 Hour per Session',
+                students: '1 Student (Short Travel)',
                 popular: false,
                 bgColor: 'bg-[#F3722C]',
                 textColor: 'text-white'
+              },
+              { 
+                id: 'large-group-training',
+                title: 'Large Group (13+ Students)', 
+                fee: '$120', 
+                sessions: '4 Team Sessions', 
+                duration: '2 Hours per Session',
+                students: '13+ Students (Per Student)',
+                popular: false,
+                bgColor: 'bg-white',
+                textColor: 'text-espresso'
+              },
+              { 
+                id: 'tryout-session',
+                title: 'Tryout Session', 
+                fee: '$30', 
+                sessions: '1 Court Evaluation', 
+                duration: '2 Hours Duration',
+                students: 'Individual / Group',
+                popular: false,
+                bgColor: 'bg-[#F9BC00]',
+                textColor: 'text-espresso'
               }
             ].map((pkg, idx) => (
               <motion.div 
                 key={idx}
                 whileHover={{ y: -6 }}
-                className={`relative p-5 sm:p-7 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-espresso/5 shadow-xl transition-all duration-500 shrink-0 w-[80vw] sm:w-[340px] md:w-[380px] snap-center ${pkg.bgColor} ${pkg.textColor}`}
+                className={`relative p-5 sm:p-7 md:p-8 rounded-[1.5rem] sm:rounded-[2rem] border border-espresso/5 shadow-xl transition-all duration-500 shrink-0 w-[80vw] sm:w-[320px] md:w-[350px] snap-center flex flex-col justify-between ${pkg.bgColor} ${pkg.textColor}`}
               >
-                {pkg.popular && (
-                  <div className="absolute top-5 sm:top-7 right-5 sm:top-7 bg-espresso text-white text-[8px] sm:text-[9px] font-black uppercase tracking-[0.2em] px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full shadow-lg">
-                    BEST VALUE
+                <div>
+                  {pkg.popular && (
+                    <div className="absolute top-5 sm:top-7 right-5 bg-espresso text-white text-[8px] sm:text-[9px] font-black uppercase tracking-[0.2em] px-3.5 sm:px-4 py-1 sm:py-1.5 rounded-full shadow-lg">
+                      BEST VALUE
+                    </div>
+                  )}
+                  <h3 className={`text-xl sm:text-2xl font-condensed font-black uppercase tracking-tight mb-3 ${pkg.textColor}`}>{pkg.title}</h3>
+                  <div className="mb-5 flex items-baseline gap-2">
+                    <span className={`text-3xl sm:text-5xl font-condensed font-black tracking-tighter ${pkg.textColor}`}>{pkg.fee}</span>
+                    <span className={`text-[9px] font-black uppercase tracking-widest ${pkg.bgColor === 'bg-[#F9BC00]' || pkg.bgColor === 'bg-white' ? 'text-espresso/60' : 'text-white/70'}`}>
+                      {pkg.students.includes('Per Student') ? '/ student' : '/ package'}
+                    </span>
                   </div>
-                )}
-                <h3 className={`text-xl sm:text-2xl font-condensed font-black uppercase tracking-tight mb-4 sm:mb-6 ${pkg.textColor}`}>{pkg.title}</h3>
-                <div className="mb-6 sm:mb-8 flex items-baseline gap-2">
-                  <span className={`text-3xl sm:text-5xl font-condensed font-black tracking-tighter ${pkg.textColor}`}>{pkg.fee}</span>
-                  <span className={`text-[9px] font-black uppercase tracking-widest ${pkg.bgColor === 'bg-[#F9BC00]' ? 'text-espresso/70' : 'text-white/70'}`}>/ package</span>
+                  <ul className="space-y-2.5 mb-6">
+                    {[pkg.sessions, pkg.duration, pkg.students, 'Certified Coaches'].map((item, i) => (
+                      <li key={i} className={`flex items-center gap-2.5 text-xs font-bold ${pkg.bgColor === 'bg-[#F9BC00]' || pkg.bgColor === 'bg-white' ? 'text-espresso/90' : 'text-white/90'}`}>
+                        <div className={`w-1.5 h-1.5 rounded-full bg-current`} />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="space-y-3 sm:space-y-4 mb-6 sm:mb-8">
-                  {[pkg.sessions, pkg.duration, 'All Skill Levels Welcome', 'Expert Position Coaching'].map((item, i) => (
-                    <li key={i} className={`flex items-center gap-3 text-xs font-bold ${pkg.bgColor === 'bg-[#F9BC00]' ? 'text-espresso/90' : 'text-white/90'}`}>
-                      <div className={`w-1.5 h-1.5 rounded-full bg-current`} />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
                 <NavLink 
-                  to={`/register?program=${encodeURIComponent(pkg.title.toLowerCase().replace(/\s+/g, '-'))}`}
+                  to={`/register?session=${pkg.id}`}
                   className={`block text-center py-3.5 sm:py-4 rounded-xl font-black uppercase tracking-[0.15em] text-[10px] transition-all shadow-md active:scale-95 ${
-                    pkg.bgColor === 'bg-[#F9BC00]' 
-                      ? 'bg-espresso text-white hover:bg-[#D62828]' 
-                      : 'bg-white text-espresso hover:bg-[#F9BC00] hover:text-espresso'
+                    pkg.bgColor === 'bg-[#D62828]' || pkg.bgColor === 'bg-[#1A1A1A]' || pkg.bgColor === 'bg-[#F3722C]'
+                      ? 'bg-white text-espresso hover:bg-[#F9BC00] hover:text-espresso' 
+                      : 'bg-espresso text-white hover:bg-[#D62828]'
                   }`}
                 >
                   Enroll Now

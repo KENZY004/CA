@@ -10,14 +10,15 @@ interface SectionHeaderProps {
   ctaPath?: string;
   dark?: boolean;
   className?: string;
+  headingClassName?: string;
   id?: string;
 }
 
-export default function SectionHeader({ eyebrow, title, italicWord, ctaLabel, ctaPath, dark, className, id }: SectionHeaderProps) {
+export default function SectionHeader({ eyebrow, title, italicWord, ctaLabel, ctaPath, dark, className, headingClassName, id }: SectionHeaderProps) {
   const parts = title.split(italicWord || '');
 
   return (
-    <div className={`flex flex-col lg:flex-row lg:items-center justify-between gap-16 mb-24 relative ${dark ? 'text-white' : 'text-espresso'} ${className}`}>
+    <div className={`flex flex-col lg:flex-row lg:items-center justify-between gap-8 sm:gap-12 mb-12 sm:mb-16 relative ${dark ? 'text-white' : 'text-espresso'} ${className || ''}`}>
       {/* Decorative Squiggle */}
       <svg className={`absolute -top-16 -left-16 w-32 h-32 opacity-10 ${dark ? 'text-white' : 'text-orange'} hidden xl:block`} viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.5">
         <path d="M10,50 Q30,10 50,50 T90,50" strokeLinecap="round" strokeDasharray="1 2" />
@@ -29,22 +30,22 @@ export default function SectionHeader({ eyebrow, title, italicWord, ctaLabel, ct
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex items-center gap-4 mb-8"
+          className="flex items-center gap-3 mb-4 sm:mb-6"
         >
-          <div className={`w-12 h-px ${dark ? 'bg-white/30' : 'bg-orange/30'}`} />
-          <span className={`${dark ? 'text-white/60' : 'text-orange'} font-black text-[11px] tracking-[0.6em] uppercase`}>{eyebrow}</span>
+          <div className={`w-8 sm:w-12 h-px ${dark ? 'bg-white/30' : 'bg-orange/30'}`} />
+          <span className={`${dark ? 'text-white/60' : 'text-orange'} font-black text-[10px] sm:text-[11px] tracking-[0.5em] uppercase`}>{eyebrow}</span>
         </motion.div>
         
         <motion.h2 
           id={id}
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-condensed leading-[0.85] uppercase tracking-tighter"
+          className={headingClassName || "text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-condensed leading-[0.9] uppercase tracking-tight"}
         >
           {parts[0]}
-          {italicWord && <span className={`${dark ? 'text-orange italic' : 'text-crimson italic'} font-serif-italic normal-case tracking-normal lowercase ml-3 mr-3`}>{italicWord}</span>}
+          {italicWord && <span className={`${dark ? 'text-orange italic' : 'text-crimson italic'} font-serif-italic normal-case tracking-normal lowercase ml-2 mr-2`}>{italicWord}</span>}
           {parts[1]}
         </motion.h2>
       </div>

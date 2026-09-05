@@ -6,12 +6,41 @@ import { useGsapReveal } from './hooks/useGsapReveal';
 import SEO from './components/SEO';
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: 'General Inquiry',
+    message: ''
+  });
+  const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
   useGsapReveal();
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setErrorMsg('');
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', subject: 'General Inquiry', message: '' });
+      } else {
+        setErrorMsg(data.message || 'Failed to send message. Please try again.');
+      }
+    } catch {
+      setErrorMsg('Network error. Please try again or reach out via WhatsApp.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -36,53 +65,54 @@ export default function Contact() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="container mx-auto px-4 relative z-10"
+        className="container mx-auto px-4 relative z-10 pt-24 sm:pt-28 md:pt-32"
       >
-        <div className="gsap-reveal mb-10">
+        {/* Balanced Section Header */}
+        <div className="gsap-reveal mb-8 sm:mb-12">
           <SectionHeader 
             eyebrow="Get in Touch" 
             title="Ready to spike your skills?"
             italicWord="spike"
+            headingClassName="text-3xl sm:text-5xl md:text-6xl font-condensed uppercase tracking-tight leading-tight"
             id="contact-header"
           />
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 mt-8 sm:mt-12 items-start">
-          {/* Contact Info */}
-          <div className="space-y-8 sm:space-y-12 gsap-reveal">
-            <div>
-              <h2 className="text-3xl sm:text-5xl md:text-7xl font-condensed uppercase tracking-tighter mb-4 sm:mb-6 leading-tight text-espresso">Let's start a <br /><span className="text-[#D62828] italic">conversation.</span></h2>
-              <p className="text-base sm:text-lg md:text-xl font-medium text-espresso/60 leading-relaxed max-w-xl">
-                Have questions about our programs, camps, or schedule? We're here to help you find the perfect fit for your athlete.
-              </p>
-            </div>
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start max-w-6xl mx-auto">
+          {/* Contact Info (5 cols) */}
+          <div className="lg:col-span-5 space-y-4 sm:space-y-6 gsap-reveal">
+            {[
+              { icon: Phone, label: 'Phone', value: '+1 (510) 555-0123', sub: 'Mon-Fri 9am - 6pm', color: 'bg-[#F9BC00]' },
+              { icon: Mail, label: 'Email', value: 'hello@challengerscoaching.com', sub: 'Response within 24 hours', color: 'bg-[#D62828]' },
+              { icon: MessageCircle, label: 'WhatsApp', value: '+1 863-845-9913', sub: 'Fastest for quick questions', color: 'bg-[#1A1A1A]' }
+            ].map((item, idx) => (
+              <motion.div 
+                key={idx}
+                whileHover={{ x: 6 }}
+                className="flex gap-4 sm:gap-5 items-center p-4 sm:p-5 bg-white rounded-2xl border border-espresso/5 shadow-md group transition-all"
+              >
+                <div className={`w-12 h-12 ${item.color} ${idx === 0 ? 'text-espresso' : 'text-white'} rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform shrink-0`}>
+                  <item.icon className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="text-[9px] font-black uppercase tracking-widest text-espresso/40 mb-0.5">{item.label}</p>
+                  <p className="text-sm sm:text-base font-bold text-espresso">{item.value}</p>
+                  <p className="text-[10px] font-medium text-espresso/40 uppercase tracking-wider">{item.sub}</p>
+                </div>
+              </motion.div>
+            ))}
 
-            <div className="space-y-4 sm:space-y-6">
-              {[
-                { icon: Phone, label: 'Phone', value: '+1 (510) 555-0123', sub: 'Mon-Fri 9am - 6pm', color: 'bg-[#F9BC00]' },
-                { icon: Mail, label: 'Email', value: 'hello@challengerscoaching.com', sub: 'Response within 24 hours', color: 'bg-[#D62828]' },
-                { icon: MessageCircle, label: 'WhatsApp', value: '+1 863-845-9913', sub: 'Fastest for quick questions', color: 'bg-[#1A1A1A]' }
-              ].map((item, idx) => (
-                <motion.div 
-                  key={idx}
-                  whileHover={{ x: 10 }}
-                  className="flex gap-4 sm:gap-6 items-center p-4 sm:p-6 bg-white rounded-2xl sm:rounded-3xl border border-espresso/5 shadow-xl group transition-all"
-                >
-                  <div className={`w-12 sm:w-14 h-12 sm:h-14 ${item.color} ${idx === 0 ? 'text-espresso' : 'text-white'} rounded-xl sm:rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform shrink-0`}>
-                    <item.icon className="w-6 sm:w-7 h-6 sm:h-7" />
-                  </div>
-                  <div>
-                    <p className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-espresso/40 mb-0.5 sm:mb-1">{item.label}</p>
-                    <p className="text-base sm:text-lg font-bold text-espresso">{item.value}</p>
-                    <p className="text-[10px] sm:text-xs font-medium text-espresso/30 uppercase tracking-widest">{item.sub}</p>
-                  </div>
-                </motion.div>
-              ))}
+            {/* Academy Locations Quick Info */}
+            <div className="p-5 bg-[#FBF9F6] rounded-2xl border border-espresso/10">
+              <h4 className="text-xs font-black uppercase tracking-widest text-espresso mb-1">Bay Area Training Locations</h4>
+              <p className="text-xs text-espresso/60 leading-relaxed font-medium">
+                Serving Fremont, Tracy, San Leandro, and surrounding communities with indoor gym and outdoor park training.
+              </p>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="bg-white p-6 sm:p-10 md:p-16 rounded-[2rem] sm:rounded-[3rem] md:rounded-[4rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] border border-espresso/5 relative overflow-hidden group gsap-reveal">
+          {/* Contact Form (7 cols) */}
+          <div className="lg:col-span-7 bg-white p-6 sm:p-8 md:p-10 rounded-[2rem] shadow-xl border border-espresso/5 relative overflow-hidden group gsap-reveal">
              <div className="absolute top-0 right-0 w-32 h-32 bg-[#F9BC00]/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000" />
             
             {submitted ? (
@@ -109,11 +139,18 @@ export default function Contact() {
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-8 relative z-10">
+                {errorMsg && (
+                  <div className="p-4 bg-red-50 border border-red-200 text-red-700 text-xs font-semibold rounded-xl">
+                    {errorMsg}
+                  </div>
+                )}
                 <div className="grid md:grid-cols-2 gap-4 sm:gap-8">
                   <div className="space-y-2 sm:space-y-3">
                     <label className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-espresso/40 ml-2">Full Name</label>
                     <input 
                       required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full bg-[#FBF9F6] border border-espresso/5 focus:border-[#F9BC00] outline-none py-3.5 sm:py-5 px-4 sm:px-6 transition-all rounded-xl sm:rounded-2xl font-medium text-sm"
                       placeholder="Jane Doe"
                     />
@@ -123,6 +160,8 @@ export default function Contact() {
                     <input 
                       required
                       type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full bg-[#FBF9F6] border border-espresso/5 focus:border-[#F9BC00] outline-none py-3.5 sm:py-5 px-4 sm:px-6 transition-all rounded-xl sm:rounded-2xl font-medium text-sm"
                       placeholder="jane@example.com"
                     />
@@ -130,7 +169,11 @@ export default function Contact() {
                 </div>
                 <div className="space-y-2 sm:space-y-3">
                   <label className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest text-espresso/40 ml-2">Subject</label>
-                  <select className="w-full bg-[#FBF9F6] border border-espresso/5 focus:border-[#F9BC00] outline-none py-3.5 sm:py-5 px-4 sm:px-6 transition-all rounded-xl sm:rounded-2xl font-medium text-sm appearance-none">
+                  <select 
+                    value={formData.subject}
+                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    className="w-full bg-[#FBF9F6] border border-espresso/5 focus:border-[#F9BC00] outline-none py-3.5 sm:py-5 px-4 sm:px-6 transition-all rounded-xl sm:rounded-2xl font-medium text-sm appearance-none"
+                  >
                     <option>General Inquiry</option>
                     <option>Program Registration</option>
                     <option>Summer Camp Questions</option>
@@ -142,12 +185,18 @@ export default function Contact() {
                   <textarea 
                     required
                     rows={4}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full bg-[#FBF9F6] border border-espresso/5 focus:border-[#F9BC00] outline-none py-3.5 sm:py-5 px-4 sm:px-6 transition-all rounded-xl sm:rounded-2xl font-medium text-sm resize-none"
                     placeholder="Tell us how we can help..."
                   />
                 </div>
-                <button type="submit" className="w-full bg-espresso text-white py-4 sm:py-6 rounded-xl sm:rounded-2xl font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-3 hover:bg-[#D62828] transition-all shadow-xl hover:shadow-[#D62828]/20">
-                  Send Message
+                <button 
+                  type="submit" 
+                  disabled={loading}
+                  className="w-full bg-espresso text-white py-4 sm:py-6 rounded-xl sm:rounded-2xl font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-3 hover:bg-[#D62828] disabled:opacity-50 transition-all shadow-xl hover:shadow-[#D62828]/20"
+                >
+                  {loading ? 'Sending...' : 'Send Message'}
                   <Send className="w-4 h-4" />
                 </button>
               </form>

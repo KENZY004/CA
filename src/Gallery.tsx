@@ -9,10 +9,12 @@ interface GalleryItem {
   url: string;
   title: string;
   description: string;
+  category?: string;
+  createdAt?: number;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// GALLERY ITEMS — edit this list to add / remove photos from the gallery page.
+// DEFAULT GALLERY ITEMS — initial academy archive photos
 // ─────────────────────────────────────────────────────────────────────────────
 const GALLERY_ITEMS: GalleryItem[] = [
   // ── Real training photos ─────────────────────────────────────────────────
@@ -22,6 +24,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     url: new URL('./assets/images/coaching.png', import.meta.url).href,
     title: 'Coach Wilson at the Net',
     description: 'Coach Wilson Mathew during a live training session — focused, composed, and ready to coach.',
+    category: 'Coaching & Technique',
   },
   {
     id: 'wilson-training',
@@ -29,6 +32,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     url: new URL('./assets/images/wilson.png', import.meta.url).href,
     title: 'Team Formation Drill',
     description: 'Players spread across the court in formation during a structured team training drill.',
+    category: 'Team Drills',
   },
   {
     id: 'volley-practice',
@@ -36,6 +40,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     url: new URL('./assets/images/volley.png', import.meta.url).href,
     title: 'Setting Practice',
     description: 'Athletes perfecting their setting technique — the cornerstone of elite volleyball play.',
+    category: 'Skill Foundations',
   },
   // ── Existing academy photos ───────────────────────────────────────────────
   {
@@ -44,6 +49,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     url: new URL('./assets/images/skill_development_1783920238862.jpg', import.meta.url).href,
     title: 'Skill Development',
     description: 'Intensive skill development drills building the fundamentals of elite volleyball.',
+    category: 'Student Spotlight',
   },
   {
     id: 'team-huddle',
@@ -51,6 +57,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     url: new URL('./assets/images/team_training_huddle_1783920253600.jpg', import.meta.url).href,
     title: 'Team Huddle',
     description: "High-energy team training and huddle under Coach Wilson's expert guidance.",
+    category: 'Team Drills',
   },
   {
     id: 'personal-coaching',
@@ -58,6 +65,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     url: new URL('./assets/images/personal_coaching_1783920294194.jpg', import.meta.url).href,
     title: 'Personal Coaching',
     description: 'One-on-one coaching sessions to sharpen individual technique and mental resilience.',
+    category: 'Coaching & Technique',
   },
   {
     id: 'volleyball-hero',
@@ -65,6 +73,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     url: new URL('./assets/images/volleyball_hero_1783920221366.jpg', import.meta.url).href,
     title: 'In Action',
     description: 'Elite athletes pushing their limits on the Challengers court.',
+    category: 'Matches & Scrimmages',
   },
   {
     id: 'journey-foundations',
@@ -72,6 +81,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     url: new URL('./assets/images/journey_phase_1_foundations_1784052995126.jpg', import.meta.url).href,
     title: 'Foundations Phase',
     description: 'Building strong volleyball fundamentals from day one.',
+    category: 'Youth Academy',
   },
   {
     id: 'journey-specialization',
@@ -79,6 +89,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     url: new URL('./assets/images/journey_phase_2_specialization_1784053013443.jpg', import.meta.url).href,
     title: 'Specialization Phase',
     description: 'Athletes honing their specialty positions and tactical understanding.',
+    category: 'Skill Foundations',
   },
   {
     id: 'journey-performance',
@@ -86,6 +97,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     url: new URL('./assets/images/journey_phase_3_performance_1784053031683.jpg', import.meta.url).href,
     title: 'Performance Phase',
     description: 'Athletes entering the high-performance stage of their development journey.',
+    category: 'Matches & Scrimmages',
   },
   {
     id: 'journey-mastery',
@@ -93,6 +105,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     url: new URL('./assets/images/journey_phase_4_mastery_1784053049057.jpg', import.meta.url).href,
     title: 'Mastery',
     description: 'The pinnacle of the Challengers development programme — elite mastery.',
+    category: 'Student Spotlight',
   },
   {
     id: 'vibrant-hero',
@@ -100,6 +113,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     url: new URL('./assets/images/vibrant_volleyball_hero_action_1784055193011.jpg', import.meta.url).href,
     title: 'Championship Spirit',
     description: 'Challengers athletes showcasing elite form and explosive athleticism.',
+    category: 'Student Spotlight',
   },
 ];
 
@@ -112,27 +126,31 @@ export default function Gallery() {
 
   useEffect(() => {
     const fetchGallery = async () => {
-      let combined = [...GALLERY_ITEMS];
-      const saved = localStorage.getItem('challengers_gallery');
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          if (Array.isArray(parsed)) {
-            const existingIds = new Set(GALLERY_ITEMS.map(i => i.id));
-            const existingUrls = new Set(GALLERY_ITEMS.map(i => i.url));
-            const customItems = parsed.filter(
-              (item: GalleryItem) =>
-                !existingIds.has(item.id) &&
-                !existingUrls.has(item.url) &&
-                !item.url.includes('unsplash.com')
-            );
-            combined = [...GALLERY_ITEMS, ...customItems];
-          }
-        } catch {
-          // ignore parse errors
+      try {
+        const res = await fetch('/api/gallery');
+        const data = await res.json();
+        if (data.success && Array.isArray(data.items) && data.items.length > 0) {
+          // Normalize URLs: if it's one of the bundled default items, use the local bundled Vite asset
+          const resolvedItems = data.items.map((item: GalleryItem) => {
+            const matchedLocal = GALLERY_ITEMS.find(local => local.id === item.id);
+            if (matchedLocal) {
+              return {
+                ...item,
+                url: matchedLocal.url,
+                category: item.category || matchedLocal.category
+              };
+            }
+            return item;
+          });
+          setItems(resolvedItems);
+          setIsLoading(false);
+          return;
         }
+      } catch (err) {
+        console.warn('Live gallery fetch fallback to default assets:', err);
       }
-      setItems(combined);
+
+      setItems(GALLERY_ITEMS);
       setIsLoading(false);
     };
     fetchGallery();
@@ -323,6 +341,11 @@ export default function Gallery() {
             </div>
             <div className="px-6 py-5 bg-espresso flex items-center justify-between gap-4">
               <div>
+                {selectedItem.category && (
+                  <span className="text-[10px] font-black uppercase tracking-widest text-orange block mb-1">
+                    {selectedItem.category}
+                  </span>
+                )}
                 <h2 className="text-lg md:text-2xl font-condensed font-black text-white uppercase tracking-tight">
                   {selectedItem.title}
                 </h2>
@@ -334,7 +357,7 @@ export default function Gallery() {
             </div>
             <button
               onClick={() => setSelectedItem(null)}
-              className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/25 transition-colors text-sm font-bold"
+              className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/25 transition-colors text-sm font-bold cursor-pointer"
             >
               ✕
             </button>
@@ -343,7 +366,7 @@ export default function Gallery() {
           {/* Next */}
           <button
             onClick={(e) => { e.stopPropagation(); navigate('next'); }}
-            className="absolute right-4 md:right-8 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-all hover:scale-110"
+            className="absolute right-4 md:right-8 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-all hover:scale-110 cursor-pointer"
           >
             <ChevronRight className="w-6 h-6" />
           </button>
@@ -385,17 +408,31 @@ function GalleryCard({ item, index, onClick }: GalleryCardProps) {
           </div>
           <Maximize2 className="w-4 h-4 text-white/70" />
         </div>
+        {item.category && (
+          <span className="text-[9px] font-black uppercase tracking-wider text-orange mb-0.5 block">
+            {item.category}
+          </span>
+        )}
         <h3 className="text-lg font-condensed font-black text-white uppercase tracking-tight leading-tight">
           {item.title}
         </h3>
         <p className="text-white/60 text-xs mt-1 line-clamp-2">{item.description}</p>
       </div>
 
-      {/* Index badge */}
-      <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/85 backdrop-blur-md border border-espresso/5 shadow-sm group-hover:opacity-0 transition-opacity">
-        <span className="text-[10px] font-black uppercase tracking-widest text-espresso">
-          #{String(index + 1).padStart(2, '0')}
-        </span>
+      {/* Index & Category badge */}
+      <div className="absolute top-4 left-4 flex items-center gap-1.5 group-hover:opacity-0 transition-opacity">
+        <div className="px-3 py-1 rounded-full bg-white/85 backdrop-blur-md border border-espresso/5 shadow-sm">
+          <span className="text-[10px] font-black uppercase tracking-widest text-espresso">
+            #{String(index + 1).padStart(2, '0')}
+          </span>
+        </div>
+        {item.category && (
+          <div className="px-2.5 py-1 rounded-full bg-espresso/80 backdrop-blur-md text-white shadow-sm hidden sm:block">
+            <span className="text-[9px] font-black uppercase tracking-wider">
+              {item.category}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );
