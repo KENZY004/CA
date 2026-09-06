@@ -51,28 +51,32 @@ function SmoothScroll() {
     if (isTouch) return;
 
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 0.9,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      wheelMultiplier: 0.85,
+      wheelMultiplier: 0.9,
       infinite: false,
     });
 
     lenisRef.current = lenis;
+    (window as any).__lenis = lenis;
 
     lenis.on('scroll', ScrollTrigger.update);
 
-    const update = (time: number) => {
-      lenis.raf(time * 1000);
+    let rafId: number;
+    const raf = (time: number) => {
+      lenis.raf(time);
+      rafId = requestAnimationFrame(raf);
     };
 
-    gsap.ticker.add(update);
+    rafId = requestAnimationFrame(raf);
     gsap.ticker.lagSmoothing(0);
 
     return () => {
-      gsap.ticker.remove(update);
       lenis.destroy();
+      cancelAnimationFrame(rafId);
       lenisRef.current = null;
+      (window as any).__lenis = null;
     };
   }, []);
 
@@ -90,38 +94,51 @@ function SmoothScroll() {
   return null;
 }
 
+function MainLayout() {
+  const { pathname } = useLocation();
+  const isAdmin = pathname.startsWith('/admin') || pathname.startsWith('/login');
+
+  return (
+    <>
+      <SmoothScroll />
+      <CustomCursor />
+      {!isAdmin && <Navigation />}
+      {!isAdmin && <WhatsAppFAB />}
+      <main className="min-h-screen">
+        <Suspense fallback={<Loading />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/programs" element={<Programs />} />
+            <Route path="/camps" element={<Camps />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/locations" element={<Locations />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/join" element={<Register />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/login" element={<Login />} />
+            <Route path="/login/admin" element={<Admin />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="/performance" element={<Performance />} />
+            <Route path="/waiver" element={<Waiver />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<Home />} />
+          </Routes>
+        </Suspense>
+      </main>
+      {!isAdmin && <Footer />}
+    </>
+  );
+}
+
 export default function App() {
   return (
     <Router>
       <PerformanceProvider>
-        <SmoothScroll />
-        <CustomCursor />
-        <Navigation />
-        <WhatsAppFAB />
-        <main className="min-h-screen">
-          <Suspense fallback={<Loading />}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/programs" element={<Programs />} />
-              <Route path="/camps" element={<Camps />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/locations" element={<Locations />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/join" element={<Register />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/terms" element={<Terms />} />
-              <Route path="/performance" element={<Performance />} />
-              <Route path="/waiver" element={<Waiver />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="*" element={<Home />} />
-            </Routes>
-          </Suspense>
-        </main>
-        <Footer />
+        <MainLayout />
       </PerformanceProvider>
     </Router>
   );

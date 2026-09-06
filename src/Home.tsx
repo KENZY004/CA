@@ -32,15 +32,22 @@ export default function Home() {
     offset: ["start start", "end end"]
   });
 
-  const y1 = useTransform(scrollYProgress, [0, 0.15], [0, -35]);
-  const y2 = useTransform(scrollYProgress, [0, 0.15], [0, -20]);
-  const y3 = useTransform(scrollYProgress, [0, 0.15], [0, -45]);
-  const y4 = useTransform(scrollYProgress, [0, 0.15], [0, -25]);
+  const { scrollYProgress: missionProgress } = useScroll({
+    target: missionRef,
+    offset: ["start end", "end start"]
+  });
 
-  const r1 = useTransform(scrollYProgress, [0, 0.15], [-8, -11]);
-  const r2 = useTransform(scrollYProgress, [0, 0.15], [5, 8]);
-  const r3 = useTransform(scrollYProgress, [0, 0.15], [-3, -6]);
-  const r4 = useTransform(scrollYProgress, [0, 0.15], [8, 11]);
+  const missionY = useTransform(missionProgress, [0, 1], [-100, 100]);
+
+  const y1 = useTransform(scrollYProgress, [0, 0.2], [0, -100]);
+  const y2 = useTransform(scrollYProgress, [0, 0.2], [0, -60]);
+  const y3 = useTransform(scrollYProgress, [0, 0.2], [0, -140]);
+  const y4 = useTransform(scrollYProgress, [0, 0.2], [0, -80]);
+
+  const r1 = useTransform(scrollYProgress, [0, 0.2], [-8, -15]);
+  const r2 = useTransform(scrollYProgress, [0, 0.2], [5, 12]);
+  const r3 = useTransform(scrollYProgress, [0, 0.2], [-3, -10]);
+  const r4 = useTransform(scrollYProgress, [0, 0.2], [8, 18]);
 
   return (
     <div ref={containerRef} className="flex flex-col">
@@ -167,7 +174,7 @@ export default function Home() {
                 </div>
                 <h3 className="font-serif-italic text-3xl mt-10 text-espresso group-hover:text-orange transition-colors">Setting Basics</h3>
                 <p className="text-[10px] uppercase tracking-[0.3em] text-espresso/40 mt-4 font-black">Technique Class</p>
-                <p className="text-espresso/60 text-xs mt-6 leading-relaxed max-w-[200px]">We break down the setting motion step by step — great for beginners and players looking to clean up their form.</p>
+                <p className="text-espresso/60 text-xs mt-6 leading-relaxed max-w-[200px]">We break down the setting motion step by step - great for beginners and players looking to clean up their form.</p>
               </div>
               
               <div className="mt-12 flex items-center gap-4">
@@ -276,7 +283,7 @@ export default function Home() {
                 transition={{ delay: 0.1 }}
                 className="text-white/60 text-sm leading-relaxed font-medium max-w-xl mx-auto"
               >
-                Watch how we train — we focus on the details that make players better, every session.
+                Watch how we train - we focus on the details that make players better, every session.
               </motion.p>
             </div>
 
@@ -290,7 +297,7 @@ export default function Home() {
 
       {/* Text Reveal Section */}
       <section className="bg-ivory gsap-reveal">
-        <TextReveal text="We help players get better — one session at a time. Our coaches keep it simple, focused, and built around what each player actually needs." />
+        <TextReveal text="We help players get better - one session at a time. Our coaches keep it simple, focused, and built around what each player actually needs." />
       </section>
 
       {/* Expertise Section (Pinned Panels) */}
@@ -354,7 +361,7 @@ export default function Home() {
             </div>
             <div className="max-w-xs">
               <p className="text-espresso/60 text-[11px] sm:text-xs font-medium leading-relaxed uppercase tracking-widest">
-                Numbers we're proud of — earned through hard work on the court, not marketing.
+                Numbers we're proud of - earned through hard work on the court, not marketing.
               </p>
             </div>
           </div>
@@ -541,7 +548,7 @@ export default function Home() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Video Carousel — coaching 1.mp4 & coaching 2.mp4
+// Video Carousel - coaching 1.mp4 & coaching 2.mp4
 // ─────────────────────────────────────────────────────────────────────────────
 const COACHING_VIDEOS = [
   {

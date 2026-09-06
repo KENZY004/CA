@@ -10,11 +10,11 @@ interface FAQ {
 const faqs: FAQ[] = [
   {
     question: "What age groups do you train?",
-    answer: "We mostly work with kids and teens between 10 and 18 years old. We split players into groups based on their skill level — not just their age — so everyone gets coaching that actually fits where they are."
+    answer: "We mostly work with kids and teens between 10 and 18 years old. We split players into groups based on their skill level - not just their age - so everyone gets coaching that actually fits where they are."
   },
   {
     question: "Can my child join if they've never played before?",
-    answer: "Absolutely. We have a beginner group specifically for players who are just starting out. We go over the basics — how to pass, how to position, how to move — before anything more advanced."
+    answer: "Absolutely. We have a beginner group specifically for players who are just starting out. We go over the basics - how to pass, how to position, how to move - before anything more advanced."
   },
   {
     question: "When are the training sessions?",
@@ -26,11 +26,11 @@ const faqs: FAQ[] = [
   },
   {
     question: "What should my child bring to practice?",
-    answer: "Indoor court shoes (non-marking soles), comfortable workout clothes, knee pads, and a water bottle. We have all the volleyballs and other training gear — you don't need to bring any of that."
+    answer: "Indoor court shoes (non-marking soles), comfortable workout clothes, knee pads, and a water bottle. We have all the volleyballs and other training gear - you don't need to bring any of that."
   },
   {
     question: "How does moving up to a higher level work?",
-    answer: "We have 5 training levels. Players move up when they're genuinely ready — our coaches assess each player regularly and let families know when it's time to step up. It's always based on skill, not just how long they've been attending."
+    answer: "We have 5 training levels. Players move up when they're genuinely ready - our coaches assess each player regularly and let families know when it's time to step up. It's always based on skill, not just how long they've been attending."
   }
 ];
 
@@ -42,36 +42,36 @@ export default function FAQSection() {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto">
-      <div className="space-y-2.5 sm:space-y-3">
+    <div className="w-full max-w-4xl mx-auto">
+      <div className="space-y-4">
         {faqs.map((faq, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: index * 0.06 }}
-            className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
+            transition={{ delay: index * 0.1 }}
+            className={`rounded-[2rem] border transition-all duration-500 overflow-hidden ${
               activeIndex === index 
-                ? 'bg-white border-espresso/10 shadow-md' 
-                : 'bg-white/60 border-espresso/5 hover:border-espresso/10 shadow-xs'
+                ? 'bg-white border-espresso/10 shadow-2xl' 
+                : 'bg-white/40 border-espresso/5 hover:border-espresso/10 shadow-sm'
             }`}
           >
             <button
               onClick={() => toggleFAQ(index)}
-              className="w-full px-5 sm:px-6 py-3.5 sm:py-4 flex items-center justify-between text-left group"
+              className="w-full px-8 py-8 flex items-center justify-between text-left group"
             >
-              <span className={`text-sm sm:text-base font-serif transition-colors duration-300 ${
+              <span className={`text-lg font-serif transition-colors duration-300 ${
                 activeIndex === index ? 'text-crimson' : 'text-espresso'
               }`}>
                 {faq.question}
               </span>
-              <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-all duration-300 shrink-0 ml-3 ${
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 ${
                 activeIndex === index 
                   ? 'bg-crimson text-white rotate-180' 
                   : 'bg-espresso/5 text-espresso group-hover:bg-espresso/10'
               }`}>
-                {activeIndex === index ? <Minus className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
+                {activeIndex === index ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
               </div>
             </button>
             
@@ -81,11 +81,11 @@ export default function FAQSection() {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 >
-                  <div className="px-5 sm:px-6 pb-4 sm:pb-5 pt-0">
-                    <div className="h-px w-8 bg-crimson/20 mb-3" />
-                    <p className="text-xs sm:text-sm text-espresso/70 leading-relaxed font-normal">
+                  <div className="px-8 pb-8">
+                    <div className="h-px w-12 bg-crimson/20 mb-6" />
+                    <p className="text-espresso/60 leading-relaxed font-medium">
                       {faq.answer}
                     </p>
                   </div>

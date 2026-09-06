@@ -1,11 +1,11 @@
 import { motion } from 'motion/react';
 import { ASSETS } from './assets/images';
+import SectionHeader from './components/SectionHeader';
 import { useGsapReveal } from './hooks/useGsapReveal';
 import SEO from './components/SEO';
 import CoachesSection from './components/CoachesSection';
 import FAQSection from './components/FAQSection';
 import { Shield, Users, Trophy } from 'lucide-react';
-import { AAULogo, FIVBLogo, NFHSLogo, USAVLogo } from './components/CredibilityLogos';
 
 const GRID_ITEMS = [
   { type: 'color', bg: '#D62828',  radius: '50% 50% 0 50%' },
@@ -49,12 +49,12 @@ export default function About() {
       </div>
 
       {/* ── HERO ──────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden pt-24 sm:pt-28 md:pt-32 pb-6 sm:pb-8" style={{ zIndex: 1 }}>
+      <section className="relative overflow-hidden pt-32 sm:pt-36 md:pt-40 pb-10 sm:pb-16" style={{ zIndex: 1 }}>
         {/* subtle bleed blobs */}
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#F9BC00]/15 rounded-full blur-[100px] -mr-32 -mt-32 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#D62828]/10 rounded-full blur-[70px] -ml-16 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-[480px] h-[480px] bg-[#F9BC00]/15 rounded-full blur-[120px] -mr-40 -mt-40 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[360px] h-[360px] bg-[#D62828]/10 rounded-full blur-[80px] -ml-20 pointer-events-none" />
 
-        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-6 lg:gap-8 items-center relative z-10">
+        <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10">
 
           {/* left: text */}
           <motion.div
@@ -62,26 +62,26 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="flex items-center gap-3 mb-3">
-              <div className="h-px w-8 bg-[#D62828]" />
+            <div className="flex items-center gap-3 mb-4 sm:mb-5">
+              <div className="h-px w-8 sm:w-10 bg-[#D62828]" />
               <span className="text-[#D62828] font-black text-[10px] tracking-[0.35em] sm:tracking-[0.4em] uppercase">Our Story</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-condensed text-espresso uppercase tracking-tighter leading-[0.9] md:leading-[0.88] mb-3 sm:mb-4">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-condensed text-espresso uppercase tracking-tighter leading-[0.9] md:leading-[0.88] mb-4 sm:mb-5">
               Building a<br />
               <span className="text-[#D62828] font-serif-italic normal-case italic tracking-normal">legacy of excellence.</span>
             </h1>
-            <p className="text-espresso/85 text-xs sm:text-sm font-medium max-w-lg leading-relaxed mb-4 sm:mb-6">
-              Challengers Volleyball Academy was started with a simple idea — give every player the right coaching, a good environment, and the support they need to get better.
+            <p className="text-espresso/85 text-xs sm:text-sm md:text-base font-medium max-w-lg leading-relaxed mb-6 sm:mb-8">
+              Challengers Volleyball Academy was started with a simple idea - give every player the right coaching, a good environment, and the support they need to get better.
             </p>
             {/* quick stats row */}
-            <div className="flex flex-wrap gap-2.5 sm:gap-3">
+            <div className="flex flex-wrap gap-3 sm:gap-4">
               {[
                 { n: '500+', l: 'Athletes Trained' },
                 { n: '30+', l: 'Years Experience' },
                 { n: 'FIVB L2', l: 'Certified Coach' },
               ].map((s) => (
-                <div key={s.l} className="px-3.5 sm:px-4 py-2 bg-white rounded-xl border border-espresso/5 shadow-sm">
-                  <div className="text-base sm:text-lg font-condensed text-[#D62828]">{s.n}</div>
+                <div key={s.l} className="px-4 sm:px-5 py-2.5 sm:py-3 bg-white rounded-2xl border border-espresso/5 shadow-sm">
+                  <div className="text-lg sm:text-xl font-condensed text-[#D62828]">{s.n}</div>
                   <div className="text-[8px] sm:text-[9px] font-black uppercase tracking-widest text-espresso/40">{s.l}</div>
                 </div>
               ))}
@@ -89,14 +89,14 @@ export default function About() {
           </motion.div>
 
           {/* right: colourful circular grid */}
-          <div className="grid grid-cols-4 grid-rows-3 gap-2 sm:gap-2.5 md:gap-3 mt-4 lg:mt-0 max-w-md lg:max-w-none mx-auto w-full">
+          <div className="grid grid-cols-4 grid-rows-3 gap-2.5 sm:gap-3 md:gap-4 mt-6 lg:mt-0">
             {GRID_ITEMS.map((item, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: i * 0.07, duration: 0.45, ease: 'backOut' }}
-                className="aspect-square overflow-hidden shadow-sm"
+                className="aspect-square overflow-hidden shadow-md"
                 style={{
                   borderRadius: item.radius,
                   background: item.type === 'color' ? item.bg : undefined,
@@ -111,121 +111,95 @@ export default function About() {
         </div>
       </section>
 
-      <div className="container mx-auto px-4 py-4 sm:py-6" style={{ position: 'relative', zIndex: 1 }}>
+      <div className="container mx-auto px-4 py-8 sm:py-12" style={{ position: 'relative', zIndex: 1 }}>
 
         {/* ── FOUNDER STORY ─────────────────────────────────── */}
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start mb-8 sm:mb-12">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start mb-12 sm:mb-16">
 
-          {/* sticky left: Bauhaus arch portrait + geometric vision & mission */}
-          <div className="space-y-3 sticky top-24 max-w-sm mx-auto lg:max-w-none w-full">
+          {/* sticky left: portrait + quick cards */}
+          <div className="space-y-5 sticky top-28">
             <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
+              initial={{ opacity: 0, scale: 0.97 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="bg-white p-3.5 sm:p-4 rounded-3xl border border-espresso/5 shadow-md backdrop-blur-sm relative overflow-hidden"
+              className="rounded-[2.5rem] overflow-hidden shadow-xl aspect-[4/5] relative group border-4 border-white/80"
             >
-              {/* Arch Silhouette Portrait */}
-              <div 
-                className="w-full aspect-[4/3.8] sm:aspect-[4/3.6] overflow-hidden shadow-inner relative group border-2 border-espresso/5 bg-[#EAE3D5]"
-                style={{ borderRadius: '10rem 10rem 1.5rem 1.5rem' }}
-              >
-                <img
-                  src={ASSETS.ABOUT.COACH_PORTRAIT}
-                  alt="Coach Wilson Mathew"
-                  className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                  referrerPolicy="no-referrer"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-espresso/80 via-transparent to-transparent opacity-70" />
-                
-                {/* Overlay Name & Tag in Arch */}
-                <div className="absolute bottom-3 left-4 right-4 text-center">
-                  <span className="text-[8px] font-black uppercase tracking-[0.25em] text-[#F9BC00] block mb-0.5">
-                    Founder & Head Coach
-                  </span>
-                  <h3 className="text-xl sm:text-2xl font-serif text-white leading-none">
-                    Wilson Mathew
-                  </h3>
-                </div>
-              </div>
-
-              {/* Sub-cred strip */}
-              <div className="mt-3 text-center">
-                <span className="inline-block px-3 py-1 bg-espresso/5 rounded-full text-[9px] font-mono font-bold text-espresso/70 uppercase tracking-wider">
-                  30+ Yrs Exp • Junior India National • FIVB L1 & L2
-                </span>
+              <img
+                src={ASSETS.ABOUT.COACH_PORTRAIT}
+                alt="Coach Wilson Mathew"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-espresso/60 to-transparent" />
+              <div className="absolute bottom-7 left-7">
+                <p className="text-[9px] font-black uppercase tracking-widest text-[#F9BC00] mb-1">Founder & Head Coach</p>
+                <h3 className="text-2xl font-serif text-white">Wilson Mathew</h3>
               </div>
             </motion.div>
 
-            {/* Geometric Vision & Mission matching hero shape motifs */}
-            <div className="grid grid-cols-2 gap-2.5">
-              <div 
-                className="p-3.5 bg-[#F9BC00] text-espresso shadow-sm flex flex-col justify-between"
-                style={{ borderRadius: '0 1.75rem 1.75rem 0' }}
-              >
-                <h4 className="text-[8px] font-black uppercase tracking-widest text-espresso/70 mb-1">Our Vision</h4>
-                <p className="text-[10px] sm:text-[11px] font-bold text-espresso leading-snug italic">
-                  "The premier volleyball program in CA — where players genuinely improve."
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-5 bg-[#F9BC00]/90 rounded-2xl border border-espresso/5 shadow-md backdrop-blur-sm">
+                <h4 className="text-[9px] font-black uppercase tracking-widest text-espresso mb-2">Our Vision</h4>
+                <p className="text-xs font-bold text-espresso/70 leading-relaxed italic">
+                  "We want to be the go-to volleyball program in California - where players come to genuinely improve and love the game."
                 </p>
               </div>
-              <div 
-                className="p-3.5 bg-[#D62828] text-white shadow-sm flex flex-col justify-between"
-                style={{ borderRadius: '1.75rem 0 0 1.75rem' }}
-              >
-                <h4 className="text-[8px] font-black uppercase tracking-widest text-[#F9BC00] mb-1">Our Mission</h4>
-                <p className="text-[10px] sm:text-[11px] font-bold text-white leading-snug italic">
-                  "Build discipline, confidence, and character that lasts."
+              <div className="p-5 bg-[#D62828]/90 text-white rounded-2xl shadow-md backdrop-blur-sm">
+                <h4 className="text-[9px] font-black uppercase tracking-widest text-[#F9BC00] mb-2">Our Mission</h4>
+                <p className="text-xs font-bold text-white/70 leading-relaxed italic">
+                  "We teach volleyball, but what we really build is discipline, confidence, and the kind of character that lasts well beyond the court."
                 </p>
               </div>
             </div>
           </div>
 
           {/* right: narrative */}
-          <div className="space-y-4 sm:space-y-5">
+          <div className="space-y-8 sm:space-y-10">
             <div className="gsap-reveal">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-condensed uppercase tracking-tighter mb-2 sm:mb-3">
-                Meet Our Founder –{' '}
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-condensed uppercase tracking-tighter mb-4 sm:mb-5">
+                Meet Our Founder -{' '}
                 <span className="text-[#D62828] font-serif-italic normal-case italic tracking-normal">Coach Wilson</span>
               </h2>
-              <p className="text-sm sm:text-base font-serif text-espresso/75 leading-relaxed italic mb-3 sm:mb-4">
-                "Volleyball has given me everything. I started this academy because I wanted to pass that on — the discipline, the teamwork, and the joy of getting better every single day."
+              <p className="text-base sm:text-lg font-serif text-espresso/75 leading-relaxed italic mb-6 sm:mb-8">
+                "Volleyball has given me everything. I started this academy because I wanted to pass that on - the discipline, the teamwork, and the joy of getting better every single day."
               </p>
 
-              <div className="space-y-2.5 sm:space-y-3 text-espresso/70 font-medium leading-relaxed text-xs">
-                {/* Journey card — orange accent */}
-                <div className="p-3 sm:p-3.5 bg-[#F3722C]/15 rounded-xl border-l-4 border-[#F3722C] backdrop-blur-sm">
-                  <h4 className="text-[8px] font-black uppercase tracking-widest text-[#F3722C] mb-1">The Journey</h4>
-                  <p className="text-[11px] leading-relaxed">
-                    Wilson Mathew grew up at G.V. Raja Sports School in Kerala. He started in track and field — winning state championships in Shot Put, Discus, and High Jump — before switching to volleyball, where he found his real calling.
+              <div className="space-y-4 sm:space-y-5 text-espresso/70 font-medium leading-relaxed text-xs sm:text-sm">
+                {/* Journey card - orange accent */}
+                <div className="p-5 sm:p-6 bg-[#F3722C]/15 rounded-2xl border-l-4 border-[#F3722C] backdrop-blur-sm">
+                  <h4 className="text-[9px] font-black uppercase tracking-widest text-[#F3722C] mb-2 sm:mb-3">The Journey</h4>
+                  <p>
+                    Wilson Mathew grew up at G.V. Raja Sports School in Kerala. He started in track and field - winning state championships in Shot Put, Discus, and High Jump - before switching to volleyball, where he found his real calling.
                   </p>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-2.5">
-                  <div className="p-2.5 sm:p-3 bg-white/80 rounded-xl border border-espresso/5 shadow-sm backdrop-blur-sm">
-                    <h4 className="text-[8px] font-black uppercase tracking-widest text-espresso/40 mb-1">Elite Training</h4>
-                    <p className="text-[11px] leading-relaxed">
-                      Selected for SAI with five years under top national coaches, representing state, university, and Indian Railways.
+                <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
+                  <div className="p-4 sm:p-5 bg-white/80 rounded-2xl border border-espresso/5 shadow-sm backdrop-blur-sm">
+                    <h4 className="text-[9px] font-black uppercase tracking-widest text-espresso/40 mb-2 sm:mb-3">Elite Training</h4>
+                    <p className="text-xs">
+                      He was selected for the Sports Authority of India (SAI) and spent five years training under top national coaches, representing his state, university, and Indian Railways.
                     </p>
                   </div>
-                  <div className="p-2.5 sm:p-3 bg-white/80 rounded-xl border border-espresso/5 shadow-sm backdrop-blur-sm">
-                    <h4 className="text-[8px] font-black uppercase tracking-widest text-espresso/40 mb-1">Professional Honors</h4>
-                    <p className="text-[11px] leading-relaxed">
-                      Junior India National camp & MVP at Jimmy George National Tournament in Dallas (2026).
+                  <div className="p-4 sm:p-5 bg-white/80 rounded-2xl border border-espresso/5 shadow-sm backdrop-blur-sm">
+                    <h4 className="text-[9px] font-black uppercase tracking-widest text-espresso/40 mb-2 sm:mb-3">Professional Excellence</h4>
+                    <p className="text-xs">
+                      He was selected for the Junior India National camp and won MVP at the Jimmy George National Tournament in Dallas (2026) - two highlights in a career built on hard work and consistency.
                     </p>
                   </div>
                 </div>
 
-                <div className="p-2.5 sm:p-3 bg-white/80 rounded-xl border border-espresso/5 shadow-sm backdrop-blur-sm">
-                  <h4 className="text-[8px] font-black uppercase tracking-widest text-espresso/40 mb-1">Coaching Philosophy</h4>
-                  <p className="text-[11px] leading-relaxed">
-                    Wilson holds FIVB Level 1 & 2 coaching certifications. He believes good coaching helps players think better, compete confidently, and grow as people.
+                <div className="p-4 sm:p-5 bg-white/80 rounded-2xl border border-espresso/5 shadow-sm backdrop-blur-sm">
+                  <h4 className="text-[9px] font-black uppercase tracking-widest text-espresso/40 mb-2 sm:mb-3">Coaching Philosophy</h4>
+                  <p className="text-xs">
+                    Wilson holds FIVB Level 1 and 2 coaching certifications. He believes good coaching is about more than drills - it's about helping players think better, compete confidently, and grow as people.
                   </p>
                 </div>
               </div>
             </div>
 
             {/* Timeline */}
-            <div className="relative pl-6 sm:pl-8 space-y-3.5 sm:space-y-4 gsap-reveal">
-              <div className="absolute left-2.5 top-2 bottom-2 w-0.5 bg-gradient-to-b from-[#D62828] via-[#F9BC00] to-[#F3722C]/30" />
+            <div className="relative pl-8 sm:pl-10 space-y-6 sm:space-y-8 gsap-reveal">
+              <div className="absolute left-3 top-2 bottom-2 w-0.5 bg-gradient-to-b from-[#D62828] via-[#F9BC00] to-[#F3722C]/30" />
               {[
                 { year: 'Early Career', event: 'Track & Field Excellence',        desc: 'National Silver Medalist in Shot Put and State Champion in multiple disciplines.' },
                 { year: 'Development', event: 'SAI Elite Training',               desc: "Selected for India's premier Sports Authority, completing 5 years of advanced volleyball training." },
@@ -241,25 +215,43 @@ export default function About() {
                   transition={{ delay: idx * 0.08 }}
                   className="relative"
                 >
-                  <div className="absolute -left-6 sm:-left-8 top-0.5 w-4 sm:w-5 h-4 sm:h-5 bg-white border-2 border-[#D62828] rounded-full flex items-center justify-center shadow-sm z-10">
-                    <div className="w-1 sm:w-1.5 h-1 sm:h-1.5 bg-[#D62828] rounded-full" />
+                  <div className="absolute -left-8 sm:-left-10 top-1 w-5 sm:w-6 h-5 sm:h-6 bg-white border-2 border-[#D62828] rounded-full flex items-center justify-center shadow-sm z-10">
+                    <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-[#D62828] rounded-full" />
                   </div>
-                  <div className="text-[8px] font-black text-[#D62828] tracking-widest uppercase mb-0.5">{m.year}</div>
-                  <h4 className="text-xs sm:text-sm font-serif text-espresso mb-0.5">{m.event}</h4>
-                  <p className="text-[11px] text-espresso/60 leading-relaxed">{m.desc}</p>
+                  <div className="text-[9px] font-black text-[#D62828] tracking-widest uppercase mb-0.5">{m.year}</div>
+                  <h4 className="text-sm sm:text-base font-serif text-espresso mb-1">{m.event}</h4>
+                  <p className="text-xs text-espresso/55 leading-relaxed">{m.desc}</p>
                 </motion.div>
               ))}
+            </div>
+
+            {/* Vision / Mission repeat */}
+            <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 gsap-reveal">
+              <div className="p-5 sm:p-7 bg-[#F9BC00] rounded-[1.5rem] sm:rounded-[1.75rem] border border-espresso/5 shadow-md relative overflow-hidden group">
+                <div className="absolute -top-6 -right-6 w-20 h-20 bg-white/20 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700" />
+                <h3 className="text-base font-serif text-espresso mb-2 relative z-10">Vision</h3>
+                <p className="text-xs text-espresso/70 leading-relaxed italic relative z-10">
+                  "A place where players genuinely improve, feel supported, and discover what they're capable of."
+                </p>
+              </div>
+              <div className="p-5 sm:p-7 bg-[#D62828] text-white rounded-[1.5rem] sm:rounded-[1.75rem] shadow-md relative overflow-hidden group">
+                <div className="absolute -top-6 -right-6 w-20 h-20 bg-white/10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700" />
+                <h3 className="text-base font-serif mb-2 relative z-10">Mission</h3>
+                <p className="text-xs text-white/70 leading-relaxed italic relative z-10">
+                  "Teach the game well. Build good people. Keep it real."
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
         {/* ── VALUES ────────────────────────────────────────── */}
-        <div className="mb-8 sm:mb-12 gsap-reveal">
-          <div className="text-center mb-4 sm:mb-6">
-            <p className="text-[#D62828] font-black text-[9px] tracking-[0.4em] uppercase mb-1">Core Values</p>
-            <h2 className="text-2xl md:text-4xl font-condensed text-espresso uppercase tracking-tighter">What we stand for.</h2>
+        <div className="mb-12 sm:mb-16 gsap-reveal">
+          <div className="text-center mb-6 sm:mb-8">
+            <p className="text-[#D62828] font-black text-[10px] tracking-[0.4em] uppercase mb-2">Core Values</p>
+            <h2 className="text-3xl md:text-5xl font-condensed text-espresso uppercase tracking-tighter">What we stand for.</h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
             {[
               { icon: Shield, title: 'Honesty',     desc: 'We tell players where they actually stand and what they need to work on. No fluff.',  bg: 'bg-[#1A1A1A]',  text: 'text-white', iconBg: 'bg-white/10 text-white' },
               { icon: Users,  title: 'Community',  desc: 'We\'re a tight-knit group. Parents, kids, and coaches all know each other by name.',       bg: 'bg-[#F9BC00]',  text: 'text-espresso', iconBg: 'bg-espresso/10 text-espresso' },
@@ -267,53 +259,53 @@ export default function About() {
             ].map((item, idx) => (
               <motion.div
                 key={idx}
-                whileHover={{ y: -4 }}
-                className={`p-4 sm:p-5 rounded-xl shadow-sm border border-espresso/5 group transition-all ${item.bg} ${item.text} backdrop-blur-sm`}
+                whileHover={{ y: -6 }}
+                className={`p-6 sm:p-8 rounded-[1.5rem] sm:rounded-[2rem] shadow-md border border-espresso/5 group transition-all ${item.bg} ${item.text} backdrop-blur-sm`}
               >
-                <div className={`w-8 sm:w-9 h-8 sm:h-9 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform ${item.iconBg}`}>
-                  <item.icon className="w-4 h-4" />
+                <div className={`w-10 sm:w-11 h-10 sm:h-11 rounded-xl flex items-center justify-center mb-4 sm:mb-5 group-hover:scale-110 transition-transform ${item.iconBg}`}>
+                  <item.icon className="w-5 h-5" />
                 </div>
-                <h3 className="text-base sm:text-lg font-serif mb-1.5">{item.title}</h3>
-                <p className="text-xs opacity-75 leading-relaxed font-medium">{item.desc}</p>
+                <h3 className="text-lg sm:text-xl font-serif mb-2 sm:mb-3">{item.title}</h3>
+                <p className="text-xs sm:text-sm opacity-70 leading-relaxed font-medium">{item.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
 
         {/* Pinned Coaches Section */}
-        <div className="-mx-4 md:-mx-8 lg:-mx-16 my-6 sm:my-10">
+        <div className="-mx-4 md:-mx-8 lg:-mx-16 my-10 sm:my-16">
           <CoachesSection />
         </div>
 
         {/* FAQ */}
-        <div className="gsap-reveal mb-8 sm:mb-12">
-          <div className="text-center mb-4 sm:mb-6">
-            <p className="text-[#D62828] font-black text-[9px] tracking-[0.4em] uppercase mb-1">Common Inquiries</p>
-            <h2 className="text-2xl md:text-4xl font-condensed text-espresso uppercase tracking-tighter">
-              Everything you need to <span className="text-[#D62828] font-serif-italic normal-case italic tracking-normal">know.</span>
-            </h2>
-          </div>
+        <div className="gsap-reveal mb-12 sm:mb-16">
+          <SectionHeader
+            eyebrow="Common Inquiries"
+            title="Everything you need to know."
+            italicWord="know"
+            id="faq-header"
+          />
           <FAQSection />
         </div>
 
         {/* ── CREDIBILITY ─────────────────────────────────── */}
-        <div className="bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-8 border border-espresso/5 shadow-sm relative overflow-hidden gsap-reveal">
+        <div className="bg-white/80 backdrop-blur-md rounded-[1.75rem] sm:rounded-[2.5rem] p-6 sm:p-10 md:p-14 border border-espresso/5 shadow-md relative overflow-hidden gsap-reveal">
           {/* colourful top border strip */}
-          <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#D62828] via-[#F9BC00] to-[#F3722C] rounded-t-2xl sm:rounded-t-3xl" />
+          <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#D62828] via-[#F9BC00] to-[#F3722C] rounded-t-[2.5rem]" />
 
-          <div className="text-center mb-4 sm:mb-6">
-            <p className="text-[#D62828] font-black text-[9px] tracking-[0.4em] uppercase mb-1">Credibility</p>
-            <h2 className="text-2xl md:text-4xl font-condensed text-espresso uppercase tracking-tighter">
+          <div className="text-center mb-6 sm:mb-10">
+            <p className="text-[#D62828] font-black text-[10px] tracking-[0.4em] uppercase mb-2">Credibility</p>
+            <h2 className="text-3xl md:text-5xl font-condensed text-espresso uppercase tracking-tighter">
               A legacy of athletic <span className="text-[#D62828] font-serif-italic normal-case italic tracking-normal">excellence.</span>
             </h2>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { label: 'AAU Member',     Logo: AAULogo,  sub: 'Junior Olympic Volleyball' },
-              { label: 'FIVB Certified', Logo: FIVBLogo, sub: 'Level 1 & 2 International' },
-              { label: 'NFHS Certified', Logo: NFHSLogo, sub: 'High School Coaching' },
-              { label: 'USA Volleyball', Logo: USAVLogo, sub: 'National Governing Body' },
+              { label: 'AAU Member',     icon: 'AAU',  color: '#D62828', bg: 'bg-[#D62828]/10' },
+              { label: 'FIVB Level 2',   icon: 'FIVB', color: '#F9BC00', bg: 'bg-[#F9BC00]/20' },
+              { label: 'NFHS Certified', icon: 'NFHS', color: '#F3722C', bg: 'bg-[#F3722C]/10' },
+              { label: 'USA Volleyball', icon: 'USAV', color: '#1B1B1D', bg: 'bg-espresso/5'    },
             ].map((item, idx) => (
               <motion.div
                 key={idx}
@@ -321,14 +313,14 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                whileHover={{ y: -3 }}
-                className="flex flex-col items-center justify-center p-4 sm:p-5 bg-[#FBF9F6] rounded-2xl border border-espresso/5 shadow-sm group hover:bg-white hover:border-espresso/15 transition-all"
+                whileHover={{ y: -4 }}
+                className="flex flex-col items-center gap-3 p-5 bg-[#FBF9F6] rounded-2xl border border-espresso/5 shadow-sm"
               >
-                <div className="w-full h-12 sm:h-14 flex items-center justify-center mb-2 px-1 group-hover:scale-105 transition-transform">
-                  <item.Logo className="max-h-full max-w-full object-contain" />
+                <div className={`w-14 h-14 ${item.bg} rounded-full flex items-center justify-center font-black text-base border-2`}
+                  style={{ color: item.color, borderColor: `${item.color}44` }}>
+                  {item.icon}
                 </div>
-                <span className="text-[9px] sm:text-[11px] font-black uppercase tracking-wider text-espresso text-center">{item.label}</span>
-                <span className="text-[7px] sm:text-[8px] font-bold uppercase tracking-widest text-espresso/45 text-center mt-0.5">{item.sub}</span>
+                <span className="text-[9px] font-black uppercase tracking-widest text-espresso/50 text-center">{item.label}</span>
               </motion.div>
             ))}
           </div>

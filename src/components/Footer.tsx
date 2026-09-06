@@ -14,17 +14,17 @@ export default function Footer() {
     }
   };
   return (
-    <footer className="bg-espresso text-white pt-16 sm:pt-24 md:pt-32 pb-12 sm:pb-16 relative overflow-hidden" aria-labelledby="footer-heading">
+    <footer className="bg-espresso text-white pt-12 sm:pt-16 md:pt-20 pb-8 sm:pb-10 relative overflow-hidden" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">Footer</h2>
-      {/* Massive Background Text - Rebound Style */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full text-center pointer-events-none select-none overflow-hidden" aria-hidden="true">
-        <div className="text-[25vw] font-serif font-black text-white/[0.03] leading-[0.7] tracking-tighter transform translate-y-[15%]">
+      {/* Background Text Watermark - Original Serif Style */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full text-center pointer-events-none select-none overflow-hidden leading-none z-0" aria-hidden="true">
+        <div className="text-[13vw] font-serif font-black text-white/[0.03] leading-none tracking-tighter whitespace-nowrap transform translate-y-[15%]">
           CHALLENGERS
         </div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 md:gap-16 mb-12 sm:mb-20 md:mb-32">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 md:gap-12 mb-10 sm:mb-12">
           {/* Column 1: Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-3 mb-8">
@@ -32,7 +32,7 @@ export default function Footer() {
               <span className="text-3xl font-condensed tracking-[0.2em]">CHALLENGERS</span>
             </div>
             <p className="text-white/80 text-sm leading-relaxed max-w-xs font-medium">
-              Volleyball coaching for all ages in the Bay Area. Come train with us — we'd love to have you.
+              Volleyball coaching for all ages in the Bay Area. Come train with us - we'd love to have you.
             </p>
           </div>
 
@@ -93,7 +93,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-[10px] font-black text-white/40 uppercase tracking-[0.2em]">
             © 2026 CHALLENGERS ACADEMY. ALL RIGHTS RESERVED.
           </p>
@@ -101,11 +101,32 @@ export default function Footer() {
             <NavLink to="/privacy" className="hover:text-white transition-colors">Privacy</NavLink>
             <NavLink to="/terms" className="hover:text-white transition-colors">Terms</NavLink>
             <div className="flex items-center gap-4 ml-4">
-              <a href="#" aria-label="Visit Challengers Academy on Instagram">
-                <Instagram className="w-4 h-4 hover:text-white cursor-pointer" />
+              <a 
+                href="https://www.instagram.com/challengers_volleyball_academy" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Visit Challengers Academy on Instagram"
+                className="text-white/40 hover:text-white transition-colors"
+              >
+                <Instagram className="w-4 h-4 cursor-pointer" />
               </a>
-              <a href="#" aria-label="Visit Challengers Academy on Twitter">
-                <Twitter className="w-4 h-4 hover:text-white cursor-pointer" />
+              <a 
+                href="https://www.facebook.com/share/1CFx15eApf/?mibextid=wwXIfr" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Visit Challengers Academy on Facebook"
+                className="text-white/40 hover:text-white transition-colors"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </a>
+              <a 
+                href="https://youtube.com/@challengersflorida?si=v4WMitdB1xMj9Q44" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Visit Challengers Academy on YouTube"
+                className="text-white/40 hover:text-white transition-colors"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
               </a>
             </div>
           </div>

@@ -23,11 +23,11 @@ export const useGsapReveal = () => {
             {
               y: 0,
               opacity: 1,
-              duration: 0.7,
-              ease: 'power3.out',
+              duration: 0.5,
+              ease: 'power2.out',
               scrollTrigger: {
                 trigger: el,
-                start: 'top 88%',
+                start: 'top 95%',
                 toggleActions: 'play none none none',
                 once: true
               }

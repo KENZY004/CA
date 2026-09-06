@@ -6,7 +6,7 @@ export const PROGRAMS: Program[] = [
     id: 'little-spikers',
     title: 'Little Spikers',
     description: 'Introduction to volleyball for the youngest athletes.',
-    longDescription: 'Little Spikers is for kids who are brand new to the sport. We keep it fun, age-appropriate, and focused on the basics — how to move, how to hit, and how to work as a team. No prior experience needed.',
+    longDescription: 'Little Spikers is for kids who are brand new to the sport. We keep it fun, age-appropriate, and focused on the basics - how to move, how to hit, and how to work as a team. No prior experience needed.',
     image: ASSETS.EXPERTISE.FOUNDATIONAL,
     ageRange: '5 - 10',
     ageGroups: ['5-10'],
@@ -16,7 +16,7 @@ export const PROGRAMS: Program[] = [
     id: 'youth-foundations',
     title: 'Youth Foundations',
     description: 'Building technical precision and core mechanics.',
-    longDescription: 'This group is for middle-school players who already know the basics and want to get sharper. We work on cleaner passing, better serving, and how to run simple plays — so players are ready for school or club tryouts.',
+    longDescription: 'This group is for middle-school players who already know the basics and want to get sharper. We work on cleaner passing, better serving, and how to run simple plays - so players are ready for school or club tryouts.',
     image: ASSETS.EXPERTISE.TACTICAL,
     ageRange: '11 - 14',
     ageGroups: ['11-14'],
@@ -36,7 +36,7 @@ export const PROGRAMS: Program[] = [
     id: 'all-ages-clinics',
     title: 'Open Skills Clinics',
     description: 'Targeted skill development for all experience levels.',
-    longDescription: 'These open sessions focus on one skill at a time — setting, hitting, passing, or serving. Open to all ages. We group players by what they can actually do, not how old they are, so no one is out of place.',
+    longDescription: 'These open sessions focus on one skill at a time - setting, hitting, passing, or serving. Open to all ages. We group players by what they can actually do, not how old they are, so no one is out of place.',
     image: ASSETS.JOURNEY.STEP_1,
     ageRange: '5 - 18',
     ageGroups: ['5-10', '11-14', '15-18'],
@@ -81,7 +81,7 @@ export const TESTIMONIALS: Testimonial[] = [
     id: 2,
     name: "Marcus Chen",
     role: "Setter, Varsity Captain",
-    content: "Coach Wilson doesn't just tell you what to do — he breaks down exactly why. That made a big difference for me as a setter. I finally understood the game, not just the plays.",
+    content: "Coach Wilson doesn't just tell you what to do - he breaks down exactly why. That made a big difference for me as a setter. I finally understood the game, not just the plays.",
     avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=200&h=200&auto=format&fit=crop"
   },
   {
@@ -110,7 +110,7 @@ export const LOCATIONS: Location[] = [
     city: 'Tracy',
     zip: '95391',
     coords: { lat: 37.7314, lng: -121.5204 },
-    description: 'A well-maintained gym at Bethany Elementary — great for youth sessions and team practice.'
+    description: 'A well-maintained gym at Bethany Elementary - great for youth sessions and team practice.'
   },
   {
     id: 'san-leandro',
@@ -119,7 +119,7 @@ export const LOCATIONS: Location[] = [
     city: 'San Leandro',
     zip: '94578',
     coords: { lat: 37.7019, lng: -122.1388 },
-    description: 'Both indoor and outdoor space at Halcyon Park — good for drills and community training sessions.'
+    description: 'Both indoor and outdoor space at Halcyon Park - good for drills and community training sessions.'
   }
 ];
 
