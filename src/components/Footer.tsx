@@ -32,7 +32,7 @@ export default function Footer() {
               <span className="text-3xl font-condensed tracking-[0.2em]">CHALLENGERS</span>
             </div>
             <p className="text-white/80 text-sm leading-relaxed max-w-xs font-medium">
-              Volleyball coaching for all ages in the Bay Area. Come train with us — we'd love to have you.
+              Volleyball coaching for all ages in the Bay Area. Come train with us - we'd love to have you.
             </p>
           </div>
 

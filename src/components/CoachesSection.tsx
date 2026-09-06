@@ -7,7 +7,7 @@ const COACH_SECTIONS = [
     number: '01',
     role: 'FOUNDER & HEAD COACH',
     name: 'Wilson Mathew',
-    description: 'I started this academy because I believe every player deserves a real coach — someone who shows up, pays attention, and helps them get better in a real way. Over 30 years on the court taught me everything I know.',
+    description: 'I started this academy because I believe every player deserves a real coach - someone who shows up, pays attention, and helps them get better in a real way. Over 30 years on the court taught me everything I know.',
     image: ASSETS.ABOUT.COACH_PORTRAIT,
     bgTexture: ASSETS.HERO.ACTION_CARD_4,
     gradient: 'from-[#C1272D] via-[#D62828] to-[#990D0D]',
@@ -24,7 +24,7 @@ const COACH_SECTIONS = [
     number: '02',
     role: 'DEFENSE & LIBERO SPECIALIST',
     name: 'Sarah Jenkins',
-    description: 'Stanford-trained and NCAA D1 experienced — Sarah brings sharp defensive skills and a training style that pushes players to react faster, move smarter, and compete at a higher level.',
+    description: 'Stanford-trained and NCAA D1 experienced - Sarah brings sharp defensive skills and a training style that pushes players to react faster, move smarter, and compete at a higher level.',
     image: ASSETS.ABOUT.COACH_SARAH,
     bgTexture: ASSETS.HERO.ACTION_CARD_2,
     gradient: 'from-[#F26627] via-[#F3722C] to-[#D64500]',
@@ -41,7 +41,7 @@ const COACH_SECTIONS = [
     number: '03',
     role: 'SETTING & OFFENSE COORDINATOR',
     name: 'Michael Chen',
-    description: 'Michael spent 15+ years playing professional volleyball across Asia. He now puts all of that experience into coaching setters and offense — helping players read the court and make smarter decisions.',
+    description: 'Michael spent 15+ years playing professional volleyball across Asia. He now puts all of that experience into coaching setters and offense - helping players read the court and make smarter decisions.',
     image: ASSETS.ABOUT.COACH_MICHAEL,
     bgTexture: ASSETS.HERO.ACTION_CARD_3,
     gradient: 'from-[#F9BC00] via-[#E5AB00] to-[#C79300]',
@@ -58,7 +58,7 @@ const COACH_SECTIONS = [
     number: '04',
     role: 'YOUTH DEVELOPMENT COACH',
     name: 'Elena Rodriguez',
-    description: 'Elena works with our youngest players and loves it. She makes practice fun while building the right habits from day one — footwork, ball control, and a love for the game.',
+    description: 'Elena works with our youngest players and loves it. She makes practice fun while building the right habits from day one - footwork, ball control, and a love for the game.',
     image: ASSETS.ABOUT.COACH_ELENA,
     bgTexture: ASSETS.HERO.ACTION_CARD_1,
     gradient: 'from-[#E63946] via-[#D62828] to-[#A01A24]',
@@ -134,7 +134,7 @@ export default function CoachesSection() {
                         color: section.badgeText,
                       }}
                     >
-                      {section.number} — {section.role}
+                      {section.number} - {section.role}
                     </span>
                   </div>
 

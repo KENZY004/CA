@@ -52,7 +52,7 @@ export default function Admin() {
     ageRange: '5 - 10',
     ageGroups: '5-10',
     features: 'Motor Skills, Fun Drills, Basic Rules, Team Play',
-    schedule: 'Saturdays & Sundays (9:00 AM – 10:30 AM)',
+    schedule: 'Saturdays & Sundays (9:00 AM - 10:30 AM)',
     location: 'Fremont Arena',
     capacity: 20,
     filled: 0,
@@ -71,7 +71,7 @@ export default function Admin() {
     months: 'June & July 2026',
     bestFor: 'Technique Refinement',
     price: 350,
-    schedule: 'Mon – Fri (9:00 AM – 1:00 PM)',
+    schedule: 'Mon - Fri (9:00 AM - 1:00 PM)',
     location: 'Fremont Arena',
     capacity: 25,
     filled: 0,
@@ -301,7 +301,7 @@ export default function Admin() {
       months: 'June & July 2026',
       bestFor: 'Technique Refinement',
       price: 350,
-      schedule: 'Mon – Fri (9:00 AM – 1:00 PM)',
+      schedule: 'Mon - Fri (9:00 AM - 1:00 PM)',
       location: 'Fremont Arena',
       capacity: 25,
       filled: 0,
@@ -320,7 +320,7 @@ export default function Admin() {
       months: camp.months || 'June & July 2026',
       bestFor: camp.bestFor || 'Technique Refinement',
       price: camp.price || 350,
-      schedule: camp.schedule || 'Mon – Fri (9:00 AM – 1:00 PM)',
+      schedule: camp.schedule || 'Mon - Fri (9:00 AM - 1:00 PM)',
       location: camp.location || 'Fremont Arena',
       capacity: camp.capacity || 25,
       filled: camp.filled || 0,
@@ -399,7 +399,7 @@ export default function Admin() {
       ageRange: '5 - 10',
       ageGroups: '5-10',
       features: 'Motor Skills, Fun Drills, Basic Rules, Team Play',
-      schedule: 'Saturdays & Sundays (9:00 AM – 10:30 AM)',
+      schedule: 'Saturdays & Sundays (9:00 AM - 10:30 AM)',
       location: 'Fremont Arena',
       capacity: 20,
       filled: 0,
@@ -1463,7 +1463,7 @@ export default function Admin() {
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="space-y-2">
                           <label className="text-[10px] font-black uppercase tracking-widest text-espresso/40">Schedule & Timings</label>
-                          <input value={programForm.schedule} onChange={e => setProgramForm({ ...programForm, schedule: e.target.value })} className="w-full bg-ivory border-0 rounded-xl px-4 py-3 text-sm font-medium" placeholder="e.g. Saturdays & Sundays (9:00 AM – 10:30 AM)" />
+                          <input value={programForm.schedule} onChange={e => setProgramForm({ ...programForm, schedule: e.target.value })} className="w-full bg-ivory border-0 rounded-xl px-4 py-3 text-sm font-medium" placeholder="e.g. Saturdays & Sundays (9:00 AM - 10:30 AM)" />
                         </div>
                         <div className="space-y-2">
                           <label className="text-[10px] font-black uppercase tracking-widest text-espresso/40">Assigned Coach</label>
@@ -1663,7 +1663,7 @@ export default function Admin() {
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="space-y-2">
                           <label className="text-[10px] font-black uppercase tracking-widest text-espresso/40">Daily Schedule</label>
-                          <input value={campForm.schedule} onChange={e => setCampForm({ ...campForm, schedule: e.target.value })} className="w-full bg-ivory border-0 rounded-xl px-4 py-3 text-sm font-medium" placeholder="e.g. Mon – Fri (9:00 AM – 1:00 PM)" />
+                          <input value={campForm.schedule} onChange={e => setCampForm({ ...campForm, schedule: e.target.value })} className="w-full bg-ivory border-0 rounded-xl px-4 py-3 text-sm font-medium" placeholder="e.g. Mon - Fri (9:00 AM - 1:00 PM)" />
                         </div>
                         <div className="space-y-2">
                           <label className="text-[10px] font-black uppercase tracking-widest text-espresso/40">Lead Coach</label>
@@ -2181,9 +2181,9 @@ export default function Admin() {
                       <div className="space-y-2">
                         <label className="text-[10px] font-black uppercase tracking-widest text-espresso/40">Role</label>
                         <select value={newAdminRole} onChange={e => setNewAdminRole(e.target.value)} className="w-full bg-ivory border-0 rounded-xl px-4 py-3 text-sm font-medium">
-                          <option value="staff">Staff — Limited access</option>
-                          <option value="coach">Coach — View registrations</option>
-                          <option value="owner">Owner — Full access</option>
+                          <option value="staff">Staff - Limited access</option>
+                          <option value="coach">Coach - View registrations</option>
+                          <option value="owner">Owner - Full access</option>
                         </select>
                       </div>
                       <div className="flex items-end gap-4">

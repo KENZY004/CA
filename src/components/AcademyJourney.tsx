@@ -17,7 +17,7 @@ const MILESTONES: Milestone[] = [
   {
     id: 1,
     title: "Foundations",
-    description: "Learning the basics — how to pass, serve, and move on the court.",
+    description: "Learning the basics - how to pass, serve, and move on the court.",
     x: 20,
     y: 48,
     image: ASSETS.JOURNEY.STEP_1
@@ -375,7 +375,7 @@ export default function AcademyJourney() {
         {/* Decorative Bottom Elements */}
         <div className="absolute bottom-8 md:bottom-12 left-6 md:left-12 pointer-events-none z-20">
           <div className="flex items-center gap-4 text-slate-500">
-            <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.5em]">01 — 04 Steps</span>
+            <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.5em]">01 - 04 Steps</span>
             <div className="w-12 md:w-24 h-px bg-slate-300" />
           </div>
         </div>

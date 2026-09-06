@@ -93,6 +93,15 @@ function verifyJWT(token: string): any | null {
   }
 }
 
+function escapeHtml(str: string): string {
+  return String(str || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 // JWT Auth Middleware
 function requireAuth(req: Request, res: Response, next: NextFunction): void {
   const auth = req.headers.authorization;
@@ -154,7 +163,7 @@ async function sendPasswordResetEmail(email: string, resetToken: string) {
   await transporter.sendMail({
     from,
     to: email,
-    subject: 'Challengers Academy — Admin Password Reset',
+    subject: 'Challengers Academy - Admin Password Reset',
     html: `
       <div style="font-family:sans-serif;max-width:480px;margin:0 auto;">
         <h2 style="color:#1a1a1a;">Reset Your Password</h2>
@@ -341,7 +350,7 @@ export const DEFAULT_CAMPS = [
     months: 'June & July 2026',
     bestFor: 'Technique Refinement',
     price: 350,
-    schedule: 'Mon – Fri (9:00 AM – 1:00 PM)',
+    schedule: 'Mon - Fri (9:00 AM - 1:00 PM)',
     location: 'Fremont Arena / Regional Facility',
     capacity: 25,
     filled: 14,
@@ -357,7 +366,7 @@ export const DEFAULT_CAMPS = [
     months: 'June & July 2026',
     bestFor: 'Game Strategy & Tactics',
     price: 480,
-    schedule: 'Mon – Fri (9:00 AM – 1:00 PM)',
+    schedule: 'Mon - Fri (9:00 AM - 1:00 PM)',
     location: 'Fremont Arena / Regional Facility',
     capacity: 25,
     filled: 18,
@@ -373,7 +382,7 @@ export const DEFAULT_CAMPS = [
     months: 'June & July 2026',
     bestFor: 'Competitive Club & High School Prep',
     price: 650,
-    schedule: 'Mon – Fri (9:00 AM – 1:00 PM)',
+    schedule: 'Mon - Fri (9:00 AM - 1:00 PM)',
     location: 'Fremont Arena / Regional Facility',
     capacity: 25,
     filled: 19,
@@ -444,7 +453,7 @@ export const DEFAULT_GALLERY_ITEMS: GalleryMediaItem[] = [
     type: 'image',
     url: '/src/assets/images/coaching.png',
     title: 'Coach Wilson at the Net',
-    description: 'Coach Wilson Mathew during a live training session — focused, composed, and ready to coach.',
+    description: 'Coach Wilson Mathew during a live training session - focused, composed, and ready to coach.',
     category: 'Coaching & Technique',
     createdAt: 1700000001000
   },
@@ -462,7 +471,7 @@ export const DEFAULT_GALLERY_ITEMS: GalleryMediaItem[] = [
     type: 'image',
     url: '/src/assets/images/volley.png',
     title: 'Setting Practice',
-    description: 'Athletes perfecting their setting technique — the cornerstone of elite volleyball play.',
+    description: 'Athletes perfecting their setting technique - the cornerstone of elite volleyball play.',
     category: 'Skill Foundations',
     createdAt: 1700000003000
   },
@@ -534,7 +543,7 @@ export const DEFAULT_GALLERY_ITEMS: GalleryMediaItem[] = [
     type: 'image',
     url: '/src/assets/images/journey_phase_4_mastery_1784053049057.jpg',
     title: 'Mastery',
-    description: 'The pinnacle of the Challengers development programme — elite mastery.',
+    description: 'The pinnacle of the Challengers development programme - elite mastery.',
     category: 'Student Spotlight',
     createdAt: 1700000011000
   },
@@ -732,7 +741,7 @@ export const SESSIONS_CATALOG: Record<string, SessionCatalogItem> = {
     locationAddress: '43575 Mission Blvd, Fremont, CA',
     schedule: 'Saturdays & Sundays',
     dates: 'Starting Next Weekend',
-    time: '9:00 AM – 10:30 AM',
+    time: '9:00 AM - 10:30 AM',
     price: 200,
     capacity: 20,
     filled: 12,
@@ -749,7 +758,7 @@ export const SESSIONS_CATALOG: Record<string, SessionCatalogItem> = {
     locationAddress: '43575 Mission Blvd, Fremont, CA',
     schedule: 'Tuesday & Thursday Evenings',
     dates: 'Bi-Weekly Batches',
-    time: '5:30 PM – 7:30 PM',
+    time: '5:30 PM - 7:30 PM',
     price: 250,
     capacity: 25,
     filled: 18,
@@ -766,7 +775,7 @@ export const SESSIONS_CATALOG: Record<string, SessionCatalogItem> = {
     locationAddress: '1255 N Tracy Blvd, Tracy, CA',
     schedule: 'Monday, Wednesday & Friday',
     dates: 'Monthly Intensive',
-    time: '6:00 PM – 8:00 PM',
+    time: '6:00 PM - 8:00 PM',
     price: 300,
     capacity: 20,
     filled: 15,
@@ -782,8 +791,8 @@ export const SESSIONS_CATALOG: Record<string, SessionCatalogItem> = {
     location: 'Fremont Central Courts',
     locationAddress: '43575 Mission Blvd, Fremont, CA',
     schedule: 'Monday through Sunday (Full Week)',
-    dates: 'July 14 – July 20, 2026',
-    time: '9:00 AM – 1:00 PM (Half-Day)',
+    dates: 'July 14 - July 20, 2026',
+    time: '9:00 AM - 1:00 PM (Half-Day)',
     price: 350,
     capacity: 50,
     filled: 42,
@@ -918,30 +927,46 @@ async function sendAdminNotificationEmail(reg: RegistrationRecord) {
   console.log(`Subject: New Registration: ${reg.playerName} ($${reg.amountPaid})`);
   console.log(`======================================================\n`);
 
+  const isQrTransfer = reg.paymentMethod === 'QR Code' || reg.paymentMethod === 'qr';
+  const emailSubject = isQrTransfer
+    ? `🔔 [Zelle / QR Transfer] ${reg.playerName} - Ref: ${reg.transactionId || 'Pending'} ($${reg.amountPaid})`
+    : `🚨 [New Paid Registration] ${reg.playerName} - ${reg.sessionName} ($${reg.amountPaid})`;
+
   if (transporter) {
     try {
       await transporter.sendMail({
         from: `"Challengers Academy" <${from}>`,
         to: adminEmail,
-        subject: `🚨 [New Paid Registration] ${reg.playerName} — ${reg.sessionName} ($${reg.amountPaid})`,
+        subject: emailSubject,
         html: `
           <!DOCTYPE html>
           <html>
           <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f7f5f0; margin: 0; padding: 24px;">
             <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 20px; overflow: hidden; border: 1px solid #eae5db; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
               <div style="background: #1B1B1D; padding: 28px; text-align: center;">
-                <div style="display: inline-block; background: #ea580c; color: #ffffff; font-weight: 900; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; padding: 6px 14px; border-radius: 50px; margin-bottom: 12px;">
-                  New Paid Registration
+                <div style="display: inline-block; background: ${isQrTransfer ? '#f59e0b' : '#ea580c'}; color: #ffffff; font-weight: 900; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; padding: 6px 14px; border-radius: 50px; margin-bottom: 12px;">
+                  ${isQrTransfer ? 'Zelle / QR Transfer Submitted' : 'New Paid Registration'}
                 </div>
                 <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">
                   ${reg.playerName}
                 </h1>
                 <p style="color: #ea580c; margin: 4px 0 0 0; font-size: 16px; font-weight: bold;">
-                  $${reg.amountPaid} USD — ${reg.sessionName}
+                  $${reg.amountPaid} USD - ${reg.sessionName}
                 </p>
               </div>
 
               <div style="padding: 28px;">
+                ${isQrTransfer ? `
+                <div style="background: #fffbeb; border: 1px solid #fef3c7; border-left: 4px solid #f59e0b; padding: 14px 16px; border-radius: 8px; margin-bottom: 20px;">
+                  <p style="margin: 0; color: #92400e; font-size: 13px; font-weight: 700;">
+                    ⚠️ Direct Transfer / Zelle Payment
+                  </p>
+                  <p style="margin: 4px 0 0 0; color: #78350f; font-size: 12px; line-height: 1.5;">
+                    The customer reported transferring <strong>$${reg.amountPaid}</strong> with Transaction/Ref ID: <strong style="font-family: monospace;">${reg.transactionId || 'N/A'}</strong>. Please verify this payment in your bank or Zelle statement.
+                  </p>
+                </div>
+                ` : ''}
+
                 <h3 style="font-size: 12px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; color: #8c827a; margin: 0 0 16px 0;">
                   Athlete & Parent Details
                 </h3>
@@ -972,7 +997,7 @@ async function sendAdminNotificationEmail(reg: RegistrationRecord) {
                   </tr>
                   <tr style="border-bottom: 1px solid #f2ede4;">
                     <td style="padding: 10px 0; color: #736b63; font-weight: 600;">Schedule & Location:</td>
-                    <td style="padding: 10px 0; color: #1B1B1D;">${reg.schedule} — ${reg.location}</td>
+                    <td style="padding: 10px 0; color: #1B1B1D;">${reg.schedule} - ${reg.location}</td>
                   </tr>
                   <tr style="border-bottom: 1px solid #f2ede4;">
                     <td style="padding: 10px 0; color: #736b63; font-weight: 600;">Payment Method:</td>
@@ -1100,7 +1125,7 @@ async function sendCustomerConfirmationEmail(reg: RegistrationRecord) {
 
                 <div style="text-align: center; border-top: 1px solid #f2ede4; pt-6; padding-top: 20px; color: #8c827a; font-size: 12px;">
                   Have questions or need assistance? Reply directly to this email or call us at (510) 555-0199.<br />
-                  <strong>Challengers Volleyball Academy</strong> — Bay Area, CA
+                  <strong>Challengers Volleyball Academy</strong> - Bay Area, CA
                 </div>
               </div>
             </div>
@@ -1141,13 +1166,16 @@ async function startServer() {
         console.error(`⚠️ Webhook signature verification failed:`, err.message);
         return res.status(400).send(`Webhook Error: ${err.message}`);
       }
-    } else {
-      // Fallback parser for testing/mock webhook events
+    } else if (process.env.NODE_ENV !== 'production') {
+      // Fallback parser ONLY for local testing/mock webhook events
       try {
         event = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
       } catch {
         event = req.body;
       }
+    } else {
+      console.error('⚠️ Rejected unverified Stripe webhook: missing signature or webhook secret in production.');
+      return res.status(400).send('Webhook signature verification required in production.');
     }
 
     console.log(`🔔 Stripe Webhook Received: ${event?.type || 'unknown_event'}`);
@@ -1225,7 +1253,7 @@ async function startServer() {
   // AUTH ENDPOINTS
   // ============================================================
 
-  // POST /api/auth/login — email + password
+  // POST /api/auth/login - email + password
   app.post('/api/auth/login', async (req, res) => {
     const { email, password, rememberMe } = req.body;
     if (!email || !password) return res.status(400).json({ success: false, message: 'Email and password are required.' });
@@ -1241,7 +1269,10 @@ async function startServer() {
 
     const db = await getMongoDb();
     if (!db) {
-      // Fallback: dev mode without DB
+      if (process.env.NODE_ENV === 'production') {
+        return res.status(503).json({ success: false, message: 'Database connection temporarily unavailable. Please try again shortly.' });
+      }
+      // Fallback: dev mode without DB ONLY
       const seedEmail = (process.env.ADMIN_SEED_EMAIL || 'kenznajeeb@gmail.com').toLowerCase();
       const seedPassword = process.env.ADMIN_SEED_PASSWORD || 'admin123';
       const inputEmail = email.toLowerCase().trim();
@@ -1296,7 +1327,7 @@ async function startServer() {
     res.json({ success: true, token, user: { email: adminUser.email, name: adminUser.name, role: adminUser.role } });
   });
 
-  // POST /api/auth/google — verify Google credential
+  // POST /api/auth/google - verify Google credential
   app.post('/api/auth/google', async (req, res) => {
     const { credential, rememberMe } = req.body;
     if (!credential) return res.status(400).json({ success: false, message: 'No credential provided.' });
@@ -1329,7 +1360,10 @@ async function startServer() {
           at: new Date()
         });
       } else {
-        // Dev fallback
+        if (process.env.NODE_ENV === 'production') {
+          return res.status(503).json({ success: false, message: 'Database connection currently unavailable. Please try again shortly.' });
+        }
+        // Dev fallback ONLY for local offline testing
         adminUser = { _id: 'dev', email: payload.email, name: payload.name, role: 'owner' };
       }
 
@@ -1347,7 +1381,7 @@ async function startServer() {
     }
   });
 
-  // GET /api/auth/me — return current user
+  // GET /api/auth/me - return current user
   app.get('/api/auth/me', requireAuth, (req, res) => {
     res.json({ success: true, user: (req as any).admin });
   });
@@ -1435,7 +1469,7 @@ async function startServer() {
     res.json({ success: true, message: 'Password reset successfully. You can now log in.' });
   });
 
-  // GET /api/auth/activity — login history
+  // GET /api/auth/activity - login history
   app.get('/api/auth/activity', requireAuth, async (req, res) => {
     const admin = (req as any).admin;
     const db = await getMongoDb();
@@ -1462,7 +1496,7 @@ async function startServer() {
     res.json({ success: true, users });
   });
 
-  // POST /api/admin/users — add new admin
+  // POST /api/admin/users - add new admin
   app.post('/api/admin/users', requireOwner, async (req, res) => {
     const { email, name, role } = req.body;
     if (!email || !name) return res.status(400).json({ success: false, message: 'Email and name are required.' });
@@ -1526,7 +1560,7 @@ async function startServer() {
   // DYNAMIC PROGRAMS & SESSIONS API
   // ============================================================
 
-  // GET /api/programs — Public endpoint (returns all active programs)
+  // GET /api/programs - Public endpoint (returns all active programs)
   app.get('/api/programs', async (req, res) => {
     try {
       const db = await getMongoDb();
@@ -1543,7 +1577,7 @@ async function startServer() {
     }
   });
 
-  // GET /api/admin/programs — Admin endpoint (returns ALL programs including drafts)
+  // GET /api/admin/programs - Admin endpoint (returns ALL programs including drafts)
   app.get('/api/admin/programs', requireAuth, async (req, res) => {
     try {
       const db = await getMongoDb();
@@ -1560,7 +1594,7 @@ async function startServer() {
     }
   });
 
-  // POST /api/admin/programs — Create new program
+  // POST /api/admin/programs - Create new program
   app.post('/api/admin/programs', requireAuth, async (req, res) => {
     try {
       const db = await getMongoDb();
@@ -1595,7 +1629,7 @@ async function startServer() {
     }
   });
 
-  // PUT /api/admin/programs/:id — Update existing program
+  // PUT /api/admin/programs/:id - Update existing program
   app.put('/api/admin/programs/:id', requireAuth, async (req, res) => {
     try {
       const db = await getMongoDb();
@@ -1625,7 +1659,7 @@ async function startServer() {
   });
 
   // ── SUMMER CAMPS API ──────────────────────────────────────────────────────
-  // GET /api/camps — Public endpoint (returns active camps)
+  // GET /api/camps - Public endpoint (returns active camps)
   app.get('/api/camps', async (req, res) => {
     try {
       const db = await getMongoDb();
@@ -1642,7 +1676,7 @@ async function startServer() {
     }
   });
 
-  // GET /api/admin/camps — Admin endpoint
+  // GET /api/admin/camps - Admin endpoint
   app.get('/api/admin/camps', requireAuth, async (req, res) => {
     try {
       const db = await getMongoDb();
@@ -1659,7 +1693,7 @@ async function startServer() {
     }
   });
 
-  // POST /api/admin/camps — Create new camp
+  // POST /api/admin/camps - Create new camp
   app.post('/api/admin/camps', requireAuth, async (req, res) => {
     try {
       const db = await getMongoDb();
@@ -1670,7 +1704,7 @@ async function startServer() {
         months: req.body.months || 'June & July 2026',
         bestFor: req.body.bestFor || 'Skill Acceleration',
         price: Number(req.body.price) || 350,
-        schedule: req.body.schedule || 'Mon – Fri (9:00 AM – 1:00 PM)',
+        schedule: req.body.schedule || 'Mon - Fri (9:00 AM - 1:00 PM)',
         location: req.body.location || 'Fremont Arena',
         capacity: Number(req.body.capacity) || 25,
         filled: Number(req.body.filled) || 0,
@@ -1691,7 +1725,7 @@ async function startServer() {
     }
   });
 
-  // PUT /api/admin/camps/:id — Update existing camp
+  // PUT /api/admin/camps/:id - Update existing camp
   app.put('/api/admin/camps/:id', requireAuth, async (req, res) => {
     try {
       const db = await getMongoDb();
@@ -1717,7 +1751,7 @@ async function startServer() {
     }
   });
 
-  // DELETE /api/admin/camps/:id — Delete camp
+  // DELETE /api/admin/camps/:id - Delete camp
   app.delete('/api/admin/camps/:id', requireAuth, async (req, res) => {
     try {
       const db = await getMongoDb();
@@ -1757,7 +1791,7 @@ async function startServer() {
                 locationAddress: 'Bay Area Facility',
                 schedule: p.schedule || 'Weekend Sessions',
                 dates: 'Rolling Enrollment',
-                time: p.schedule?.includes('(') ? p.schedule.split('(')[1]?.replace(')', '') : '10:00 AM – 12:00 PM',
+                time: p.schedule?.includes('(') ? p.schedule.split('(')[1]?.replace(')', '') : '10:00 AM - 12:00 PM',
                 price: Number(p.price) || 200,
                 capacity: Number(p.capacity) || 20,
                 filled: Number(p.filled) || 0,
@@ -1778,9 +1812,9 @@ async function startServer() {
                 skillLevel: c.bestFor || 'Technique Refinement',
                 location: c.location || 'Fremont Arena',
                 locationAddress: 'Bay Area Facility',
-                schedule: c.schedule || 'Mon – Fri',
+                schedule: c.schedule || 'Mon - Fri',
                 dates: c.months || 'June & July 2026',
-                time: '9:00 AM – 1:00 PM',
+                time: '9:00 AM - 1:00 PM',
                 price: Number(c.price) || 350,
                 capacity: Number(c.capacity) || 25,
                 filled: Number(c.filled) || 0,
@@ -1817,7 +1851,7 @@ async function startServer() {
               locationAddress: 'Bay Area Facility',
               schedule: prog.schedule || 'Weekend Sessions',
               dates: 'Rolling Enrollment',
-              time: '10:00 AM – 12:00 PM',
+              time: '10:00 AM - 12:00 PM',
               price: Number(prog.price) || 200,
               capacity: Number(prog.capacity) || 20,
               filled: Number(prog.filled) || 0,
@@ -1838,9 +1872,9 @@ async function startServer() {
               skillLevel: camp.bestFor || 'Technique Refinement',
               location: camp.location || 'Fremont Arena',
               locationAddress: 'Bay Area Facility',
-              schedule: camp.schedule || 'Mon – Fri',
+              schedule: camp.schedule || 'Mon - Fri',
               dates: camp.months || 'June & July 2026',
-              time: '9:00 AM – 1:00 PM',
+              time: '9:00 AM - 1:00 PM',
               price: Number(camp.price) || 350,
               capacity: Number(camp.capacity) || 25,
               filled: Number(camp.filled) || 0,
@@ -1903,7 +1937,7 @@ async function startServer() {
             name: dbCamp.name,
             price: Number(dbCamp.price) || 350,
             location: dbCamp.location || 'Fremont Arena',
-            schedule: dbCamp.schedule || 'Mon – Fri',
+            schedule: dbCamp.schedule || 'Mon - Fri',
             capacity: Number(dbCamp.capacity) || 25,
             filled: Number(dbCamp.filled) || 0
           };
@@ -1959,9 +1993,11 @@ async function startServer() {
     if (!stripe) {
       // Mock clientSecret for development/testing when Stripe key is not configured
       const mockSecret = `mock_pi_${registrationId}_secret_${nanoid(8)}`;
+      const appUrl = process.env.APP_URL || `${req.protocol}://${req.get('host')}`;
       return res.json({
         success: true,
         clientSecret: mockSecret,
+        checkoutUrl: `${appUrl}/register?completed=true&registrationId=${registrationId}`,
         registrationId,
         leadId,
         amount: session.price,
@@ -1979,14 +2015,41 @@ async function startServer() {
         currency: chargeCurrency,
         automatic_payment_methods: { enabled: true },
         receipt_email: email,
-        description: `Challengers Academy — ${session.name} — Athlete: ${playerName || 'Student'}`,
+        description: `Challengers Academy - ${session.name} - Athlete: ${playerName || 'Student'}`,
         metadata
       });
+
+      let checkoutUrl: string | null = null;
+      try {
+        const appUrl = process.env.APP_URL || `${req.protocol}://${req.get('host')}`;
+        const checkoutSession = await stripe.checkout.sessions.create({
+          line_items: [{
+            price_data: {
+              currency: chargeCurrency,
+              product_data: {
+                name: `Challengers Academy - ${session.name}`,
+                description: `Athlete: ${playerName || 'Student Athlete'} | Schedule: ${session.schedule} | Location: ${session.location}`,
+              },
+              unit_amount: chargeAmount,
+            },
+            quantity: 1,
+          }],
+          mode: 'payment',
+          customer_email: email,
+          metadata,
+          success_url: `${appUrl}/register?completed=true&registrationId=${registrationId}`,
+          cancel_url: `${appUrl}/register?canceled=true`
+        });
+        checkoutUrl = checkoutSession.url;
+      } catch (checkoutErr: any) {
+        console.warn('Checkout session creation fallback:', checkoutErr.message);
+      }
 
       res.json({
         success: true,
         clientSecret: paymentIntent.client_secret,
         paymentIntentId: paymentIntent.id,
+        checkoutUrl,
         registrationId,
         leadId,
         amount: session.price,
@@ -1998,19 +2061,61 @@ async function startServer() {
     }
   });
 
+  // Check registration status (used for real-time Stripe QR mobile payments)
+  app.get('/api/registration-status/:registrationId', async (req, res) => {
+    const { registrationId } = req.params;
+    if (registrations[registrationId]) {
+      return res.json({ success: true, confirmed: true, registration: registrations[registrationId] });
+    }
+    const db = await getMongoDb();
+    if (db) {
+      try {
+        const found = await db.collection('registrations').findOne({ registrationId });
+        if (found) {
+          registrations[registrationId] = found as any;
+          return res.json({ success: true, confirmed: true, registration: found });
+        }
+      } catch (e: any) {
+        console.error('Registration status query error:', e.message);
+      }
+    }
+    res.json({ success: true, confirmed: false });
+  });
+
   // Verify and finalize payment (supports QR scanning, instant webhook fallback, and Stripe/mock confirmations)
   app.post('/api/verify-payment', async (req, res) => {
-    const { paymentIntentId, registrationId, leadId, paymentMethod, transactionId } = req.body;
+    const { paymentIntentId, registrationId, leadId, paymentMethod, transactionId, studentData } = req.body;
 
     // Check if webhook already confirmed this registration
     if (registrationId && registrations[registrationId]) {
       return res.json({ success: true, registration: registrations[registrationId] });
     }
 
-    const lead = leadId ? leads[leadId] : null;
+    let lead = leadId ? leads[leadId] : null;
+    if (!lead && leadId) {
+      const db = await getMongoDb();
+      if (db) {
+        try {
+          lead = await db.collection('leads').findOne({ id: leadId });
+          if (lead) leads[leadId] = lead;
+        } catch (e: any) {
+          console.error('Failed to lookup lead from DB:', e.message);
+        }
+      }
+    }
+
+    const student = studentData || {};
     const regId = registrationId || lead?.registrationId || generateRegistrationId();
-    const sessionId = lead?.sessionId || 'starter-pack';
+    const sessionId = lead?.sessionId || req.body.sessionId || student.sessionId || 'starter-pack';
     const session = SESSIONS_CATALOG[sessionId];
+
+    const playerName = lead?.playerName || student.playerName || 'Student Athlete';
+    const parentName = lead?.parentName || student.parentName || '';
+    const email = lead?.email || student.email || 'customer@example.com';
+    const phone = lead?.phone || student.phone || 'N/A';
+    const dob = lead?.dob || student.dob || '';
+    const emergencyContactName = lead?.emergencyContactName || student.emergencyContactName || '';
+    const emergencyContactPhone = lead?.emergencyContactPhone || student.emergencyContactPhone || '';
 
     // 1. QR Code / Direct Instant Transfer
     if (paymentMethod === 'QR Code' || paymentMethod === 'qr') {
@@ -2019,11 +2124,11 @@ async function startServer() {
         registrationId: regId,
         sessionId: session?.id || 'starter-pack',
         sessionName: session?.name || 'Challengers Coaching Session',
-        playerName: lead?.playerName || 'Student Athlete',
-        parentName: lead?.parentName || '',
-        email: lead?.email || 'customer@example.com',
-        phone: lead?.phone || 'N/A',
-        dob: lead?.dob || '',
+        playerName,
+        parentName,
+        email,
+        phone,
+        dob,
         location: session?.location || 'Fremont Arena',
         schedule: session?.schedule || 'Weekend Sessions',
         amountPaid: session?.price || 200,
@@ -2031,8 +2136,8 @@ async function startServer() {
         paymentMethod: 'QR Code',
         transactionId: cleanTx,
         stripePaymentIntentId: `qr_${cleanTx}`,
-        emergencyContactName: lead?.emergencyContactName || '',
-        emergencyContactPhone: lead?.emergencyContactPhone || '',
+        emergencyContactName,
+        emergencyContactPhone,
         waiverAccepted: true,
         registeredAt: Date.now()
       };
@@ -2059,11 +2164,11 @@ async function startServer() {
         registrationId: regId,
         sessionId: session?.id || 'starter-pack',
         sessionName: session?.name || 'Challengers Coaching Session',
-        playerName: lead?.playerName || 'Student Athlete',
-        parentName: lead?.parentName || '',
-        email: lead?.email || 'customer@example.com',
-        phone: lead?.phone || 'N/A',
-        dob: lead?.dob || '',
+        playerName,
+        parentName,
+        email,
+        phone,
+        dob,
         location: session?.location || 'Fremont Arena',
         schedule: session?.schedule || 'Weekend Sessions',
         amountPaid: session?.price || 200,
@@ -2071,8 +2176,8 @@ async function startServer() {
         paymentMethod: paymentMethod || 'Card',
         transactionId: transactionId || paymentIntentId || `mock_pi_${regId}`,
         stripePaymentIntentId: paymentIntentId || `mock_pi_${regId}`,
-        emergencyContactName: lead?.emergencyContactName || '',
-        emergencyContactPhone: lead?.emergencyContactPhone || '',
+        emergencyContactName,
+        emergencyContactPhone,
         waiverAccepted: true,
         registeredAt: Date.now()
       };
@@ -2208,20 +2313,25 @@ async function startServer() {
       if (transporter) {
         const supportEmail = process.env.ACADEMY_ADMIN_EMAIL || process.env.EMAIL_TO || process.env.EMAIL_USER || 'hello@challengerscoaching.com';
         try {
+          const safeName = escapeHtml(name);
+          const safeEmail = escapeHtml(email);
+          const safeSubject = escapeHtml(subject || 'General Inquiry');
+          const safeMessage = escapeHtml(message);
+
           await transporter.sendMail({
             from: process.env.EMAIL_FROM || process.env.EMAIL_USER,
             to: supportEmail,
             replyTo: email,
-            subject: `[Contact Form] ${subject || 'New Inquiry'} from ${name}`,
+            subject: `[Contact Form] ${safeSubject} from ${safeName}`,
             html: `
               <div style="font-family:sans-serif;max-width:560px;margin:0 auto;padding:24px;border:1px solid #eaeaea;border-radius:12px;background:#ffffff;">
                 <h2 style="color:#C1272D;margin-top:0;">🏐 New Website Inquiry</h2>
-                <p style="margin:6px 0;"><strong>Name:</strong> ${name}</p>
-                <p style="margin:6px 0;"><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-                <p style="margin:6px 0;"><strong>Subject:</strong> ${subject || 'General Inquiry'}</p>
+                <p style="margin:6px 0;"><strong>Name:</strong> ${safeName}</p>
+                <p style="margin:6px 0;"><strong>Email:</strong> <a href="mailto:${safeEmail}">${safeEmail}</a></p>
+                <p style="margin:6px 0;"><strong>Subject:</strong> ${safeSubject}</p>
                 <hr style="border:none;border-top:1px solid #eee;margin:16px 0;" />
                 <p style="margin:6px 0;"><strong>Message:</strong></p>
-                <p style="white-space:pre-wrap;background:#f8f8f8;padding:14px;border-radius:8px;line-height:1.6;color:#333;">${message}</p>
+                <p style="white-space:pre-wrap;background:#f8f8f8;padding:14px;border-radius:8px;line-height:1.6;color:#333;">${safeMessage}</p>
                 <hr style="border:none;border-top:1px solid #eee;margin:16px 0;" />
                 <p style="font-size:11px;color:#888;margin:0;">Submitted via Challengers Academy Contact Form at ${new Date().toLocaleString()}</p>
               </div>

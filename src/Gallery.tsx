@@ -14,7 +14,7 @@ interface GalleryItem {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// DEFAULT GALLERY ITEMS — initial academy archive photos
+// DEFAULT GALLERY ITEMS - initial academy archive photos
 // ─────────────────────────────────────────────────────────────────────────────
 const GALLERY_ITEMS: GalleryItem[] = [
   // ── Real training photos ─────────────────────────────────────────────────
@@ -23,7 +23,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     type: 'image',
     url: new URL('./assets/images/coaching.png', import.meta.url).href,
     title: 'Coach Wilson at the Net',
-    description: 'Coach Wilson Mathew during a live training session — focused, composed, and ready to coach.',
+    description: 'Coach Wilson Mathew during a live training session - focused, composed, and ready to coach.',
     category: 'Coaching & Technique',
   },
   {
@@ -39,7 +39,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     type: 'image',
     url: new URL('./assets/images/volley.png', import.meta.url).href,
     title: 'Setting Practice',
-    description: 'Athletes perfecting their setting technique — the cornerstone of elite volleyball play.',
+    description: 'Athletes perfecting their setting technique - the cornerstone of elite volleyball play.',
     category: 'Skill Foundations',
   },
   // ── Existing academy photos ───────────────────────────────────────────────
@@ -104,7 +104,7 @@ const GALLERY_ITEMS: GalleryItem[] = [
     type: 'image',
     url: new URL('./assets/images/journey_phase_4_mastery_1784053049057.jpg', import.meta.url).href,
     title: 'Mastery',
-    description: 'The pinnacle of the Challengers development programme — elite mastery.',
+    description: 'The pinnacle of the Challengers development programme - elite mastery.',
     category: 'Student Spotlight',
   },
   {

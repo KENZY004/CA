@@ -57,7 +57,7 @@ export default function Programs() {
     <div className="relative pt-32 sm:pt-36 md:pt-40 pb-10 sm:pb-12 min-h-screen overflow-hidden font-sans">
       <SEO 
         title="Training Programs" 
-        description="We have training programs for all ages and skill levels — from complete beginners to players looking to compete seriously. Based in the Bay Area."
+        description="We have training programs for all ages and skill levels - from complete beginners to players looking to compete seriously. Based in the Bay Area."
       />
       
       {/* High-Impact Volleyball Background */}
@@ -330,7 +330,7 @@ export default function Programs() {
             </div>
             <h3 className="text-xl sm:text-3xl font-condensed font-black uppercase tracking-tight text-white mb-3 sm:mb-4">Team Coaching</h3>
             <p className="text-white/80 text-xs sm:text-sm font-bold leading-relaxed mb-5 sm:mb-7 max-w-sm italic">
-              We coach school teams, club teams, and competitive squads — either at your gym or ours. Works for all age groups.
+              We coach school teams, club teams, and competitive squads - either at your gym or ours. Works for all age groups.
             </p>
             <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
               {['School Teams', 'Club Teams', 'Competitive Teams', 'All Ages'].map((item, i) => (

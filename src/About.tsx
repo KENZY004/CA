@@ -71,7 +71,7 @@ export default function About() {
               <span className="text-[#D62828] font-serif-italic normal-case italic tracking-normal">legacy of excellence.</span>
             </h1>
             <p className="text-espresso/85 text-xs sm:text-sm md:text-base font-medium max-w-lg leading-relaxed mb-6 sm:mb-8">
-              Challengers Volleyball Academy was started with a simple idea — give every player the right coaching, a good environment, and the support they need to get better.
+              Challengers Volleyball Academy was started with a simple idea - give every player the right coaching, a good environment, and the support they need to get better.
             </p>
             {/* quick stats row */}
             <div className="flex flex-wrap gap-3 sm:gap-4">
@@ -141,7 +141,7 @@ export default function About() {
               <div className="p-5 bg-[#F9BC00]/90 rounded-2xl border border-espresso/5 shadow-md backdrop-blur-sm">
                 <h4 className="text-[9px] font-black uppercase tracking-widest text-espresso mb-2">Our Vision</h4>
                 <p className="text-xs font-bold text-espresso/70 leading-relaxed italic">
-                  "We want to be the go-to volleyball program in California — where players come to genuinely improve and love the game."
+                  "We want to be the go-to volleyball program in California - where players come to genuinely improve and love the game."
                 </p>
               </div>
               <div className="p-5 bg-[#D62828]/90 text-white rounded-2xl shadow-md backdrop-blur-sm">
@@ -157,19 +157,19 @@ export default function About() {
           <div className="space-y-8 sm:space-y-10">
             <div className="gsap-reveal">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-condensed uppercase tracking-tighter mb-4 sm:mb-5">
-                Meet Our Founder –{' '}
+                Meet Our Founder -{' '}
                 <span className="text-[#D62828] font-serif-italic normal-case italic tracking-normal">Coach Wilson</span>
               </h2>
               <p className="text-base sm:text-lg font-serif text-espresso/75 leading-relaxed italic mb-6 sm:mb-8">
-                "Volleyball has given me everything. I started this academy because I wanted to pass that on — the discipline, the teamwork, and the joy of getting better every single day."
+                "Volleyball has given me everything. I started this academy because I wanted to pass that on - the discipline, the teamwork, and the joy of getting better every single day."
               </p>
 
               <div className="space-y-4 sm:space-y-5 text-espresso/70 font-medium leading-relaxed text-xs sm:text-sm">
-                {/* Journey card — orange accent */}
+                {/* Journey card - orange accent */}
                 <div className="p-5 sm:p-6 bg-[#F3722C]/15 rounded-2xl border-l-4 border-[#F3722C] backdrop-blur-sm">
                   <h4 className="text-[9px] font-black uppercase tracking-widest text-[#F3722C] mb-2 sm:mb-3">The Journey</h4>
                   <p>
-                    Wilson Mathew grew up at G.V. Raja Sports School in Kerala. He started in track and field — winning state championships in Shot Put, Discus, and High Jump — before switching to volleyball, where he found his real calling.
+                    Wilson Mathew grew up at G.V. Raja Sports School in Kerala. He started in track and field - winning state championships in Shot Put, Discus, and High Jump - before switching to volleyball, where he found his real calling.
                   </p>
                 </div>
 
@@ -183,7 +183,7 @@ export default function About() {
                   <div className="p-4 sm:p-5 bg-white/80 rounded-2xl border border-espresso/5 shadow-sm backdrop-blur-sm">
                     <h4 className="text-[9px] font-black uppercase tracking-widest text-espresso/40 mb-2 sm:mb-3">Professional Excellence</h4>
                     <p className="text-xs">
-                      He was selected for the Junior India National camp and won MVP at the Jimmy George National Tournament in Dallas (2026) — two highlights in a career built on hard work and consistency.
+                      He was selected for the Junior India National camp and won MVP at the Jimmy George National Tournament in Dallas (2026) - two highlights in a career built on hard work and consistency.
                     </p>
                   </div>
                 </div>
@@ -191,7 +191,7 @@ export default function About() {
                 <div className="p-4 sm:p-5 bg-white/80 rounded-2xl border border-espresso/5 shadow-sm backdrop-blur-sm">
                   <h4 className="text-[9px] font-black uppercase tracking-widest text-espresso/40 mb-2 sm:mb-3">Coaching Philosophy</h4>
                   <p className="text-xs">
-                    Wilson holds FIVB Level 1 and 2 coaching certifications. He believes good coaching is about more than drills — it's about helping players think better, compete confidently, and grow as people.
+                    Wilson holds FIVB Level 1 and 2 coaching certifications. He believes good coaching is about more than drills - it's about helping players think better, compete confidently, and grow as people.
                   </p>
                 </div>
               </div>

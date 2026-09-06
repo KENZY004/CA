@@ -10,11 +10,11 @@ interface FAQ {
 const faqs: FAQ[] = [
   {
     question: "What age groups do you train?",
-    answer: "We mostly work with kids and teens between 10 and 18 years old. We split players into groups based on their skill level — not just their age — so everyone gets coaching that actually fits where they are."
+    answer: "We mostly work with kids and teens between 10 and 18 years old. We split players into groups based on their skill level - not just their age - so everyone gets coaching that actually fits where they are."
   },
   {
     question: "Can my child join if they've never played before?",
-    answer: "Absolutely. We have a beginner group specifically for players who are just starting out. We go over the basics — how to pass, how to position, how to move — before anything more advanced."
+    answer: "Absolutely. We have a beginner group specifically for players who are just starting out. We go over the basics - how to pass, how to position, how to move - before anything more advanced."
   },
   {
     question: "When are the training sessions?",
@@ -26,11 +26,11 @@ const faqs: FAQ[] = [
   },
   {
     question: "What should my child bring to practice?",
-    answer: "Indoor court shoes (non-marking soles), comfortable workout clothes, knee pads, and a water bottle. We have all the volleyballs and other training gear — you don't need to bring any of that."
+    answer: "Indoor court shoes (non-marking soles), comfortable workout clothes, knee pads, and a water bottle. We have all the volleyballs and other training gear - you don't need to bring any of that."
   },
   {
     question: "How does moving up to a higher level work?",
-    answer: "We have 5 training levels. Players move up when they're genuinely ready — our coaches assess each player regularly and let families know when it's time to step up. It's always based on skill, not just how long they've been attending."
+    answer: "We have 5 training levels. Players move up when they're genuinely ready - our coaches assess each player regularly and let families know when it's time to step up. It's always based on skill, not just how long they've been attending."
   }
 ];
 

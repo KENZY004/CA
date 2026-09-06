@@ -220,7 +220,7 @@ html.lenis body {
   background: #2a2a2d;
 }
 
-/* Scroll-driven fade + scale exit — only in supporting browsers */
+/* Scroll-driven fade + scale exit - only in supporting browsers */
 @supports (animation-timeline: view()) {
   @keyframes camps-hero-exit {
     to {
